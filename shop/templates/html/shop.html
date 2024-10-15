@@ -1,0 +1,432 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACTIVIST</title>
+    <link rel="stylesheet" href="{% static 'css/productDetail.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            font-family: 'Open Sans',Helvetica,Arial,Lucida,sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            z-index: 100;
+            margin-bottom: 70px;
+            
+        }
+          /* Hamburger menu for mobile */
+        .menu-button {
+            
+            cursor: pointer;
+        }
+        #main-menu{
+            display: block;
+        }
+
+        .menu-button div {
+            width: 35px;
+            height: 4px;
+            background-color: black;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+      
+
+        /* Overlay styles */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1;
+        }
+
+        /* Centered and blurred logo */
+        #logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0.08;
+            filter: blur(3px);
+            width: 500px;
+            /* Adjust size as necessary */
+        }
+
+        /* Header styles */
+        header {
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            padding: 0 20px;
+            background-color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            border-bottom: 1px solid #cccccc;
+           
+        }
+
+        .header-logo h1 {
+            margin: 0;
+        }
+
+        .menu-button,
+        .cart-button {
+            cursor: pointer;
+        }
+
+        /* Product grid styles */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 10;
+            margin-top: 150px;
+            /* Ensures it moves on top of the logo */
+        }
+
+        .product-item {
+            padding: 10px;
+            text-align: center;
+            z-index: 1;
+            background-color: white;
+           
+        }
+        a{
+            text-decoration: none;
+            color: #000;
+            font-size: bolder;
+        }
+
+        .product-item:hover {
+           
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+          
+        }
+
+        .product-name {
+            font-size: 18px;
+            margin: 10px 0;
+           
+
+        }
+
+        .product-price {
+            font-size: 16px;
+            margin-bottom: 10px;
+
+        }
+
+        .add-to-cart {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #218838;
+        }
+
+        /* Footer styles
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            padding: 0;
+            color: #fff;
+            background-color: white;
+            z-index: 10;
+        }
+
+        .footer-logo img {
+            height: 50px;
+        } */
+
+        #logo-footer{
+            max-width: 20%;
+            width: 33%;
+        }
+        /* Sliding menu/cart styles */
+        .slide-menu,
+        .slide-cart {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            max-width: 400px;
+            background-color: #fff;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .slide-cart {
+            right: 0;
+            transform: translateX(100%);
+        }
+
+        .slide-menu.active,
+        .slide-cart.active {
+            transform: translateX(0);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Hover and modern effects for categories */
+        #catBox span {
+            margin: 10px;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        #catBox span:hover {
+            color: #ff4500;
+            transform: scale(1.1);
+        }
+
+        #active {
+            border-bottom: 2px solid grey;
+            color: #000;
+            font-weight: bold;
+            padding-bottom: 5px;
+        }
+        footer{
+            background-color: #1e1e1e;
+            color: white;
+            margin-bottom: -80px;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 5px;
+            }
+
+            .product-item {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5px;
+                padding: 5px;
+            }
+
+            .product-item {
+                padding: 6px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Header -->
+    <header>
+            <div class="menu-button" id="menu-btn">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        <div class="header-logo">
+            <img src="{% static 'logo.svg' %}" alt="Footer Logo">
+        </div>
+        <div class="cart-button">
+            <button class="btn btn-outline-dark" id="cart-btn" type="submit">
+                <i class="bi-cart-fill me-1"></i>
+                Cart
+                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sliding Menu -->
+    <div class="slide-menu" id="menu">
+        <span class="close-btn" id="close-menu">&times;</span>
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Sliding Cart -->
+    <div class="slide-cart" id="cart">
+        <span class="close-btn" id="close-cart">&times;</span>
+        <div id="bag-header">YOUR BAG</div>
+        <hr>
+        <p>Your cart is empty!</p>
+    </div>
+
+    <!-- Main content -->
+    <main>
+        <div id="maincat">
+            <div id="categoriesBox">
+                <div id="categories">
+                    <span>Categories</span>
+                </div>
+                <div id="catBox">
+                    <span id="active">All</span>
+                    <span>Hoodies</span>
+                    <span>Tees</span>
+                    <span>Shorts</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            {% for product in products %}
+            <a href="{% url 'productDetail' product.unique_id %}">
+                <div class="product-item">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <div class="product-name">{{ product.name }}</div>
+                    <div class="product-price">GH₵{{ product.price }}</div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+    <!-- Footer -->
+    <!-- <footer>
+        <div class="footer-logo">
+            <img src="{% static 'logo.svg' %}" alt="Footer Logo">
+        </div>
+    </footer> -->
+
+    <!-- JavaScript to handle the menu and cart sliding -->
+     <footer>
+        <div><img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo"></div>
+        <div>
+            <span><svg width="140px" height="140px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z"
+                        stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z"
+                        stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)" fill="#ffffff"></rect>
+                    <rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)" stroke="#ffffff"
+                        stroke-linecap="round"></rect>
+                </g>
+            </svg></span>
+            <span><svg fill="#ffffff" width="111px" height="111px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <title>facebook</title>
+                    <path
+                        d="M30.996 16.091c-0.001-8.281-6.714-14.994-14.996-14.994s-14.996 6.714-14.996 14.996c0 7.455 5.44 13.639 12.566 14.8l0.086 0.012v-10.478h-3.808v-4.336h3.808v-3.302c-0.019-0.167-0.029-0.361-0.029-0.557 0-2.923 2.37-5.293 5.293-5.293 0.141 0 0.281 0.006 0.42 0.016l-0.018-0.001c1.199 0.017 2.359 0.123 3.491 0.312l-0.134-0.019v3.69h-1.892c-0.086-0.012-0.185-0.019-0.285-0.019-1.197 0-2.168 0.97-2.168 2.168 0 0.068 0.003 0.135 0.009 0.202l-0.001-0.009v2.812h4.159l-0.665 4.336h-3.494v10.478c7.213-1.174 12.653-7.359 12.654-14.814v-0z">
+                    </path>
+                </g>
+            </svg></span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" xmlns:xlink="http://www.w3.org/1999/xlink" width="111px" height="111px"
+                viewBox="0 0 150 150" version="1.1">
+                <g id="surface1">
+                    <path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;"
+                        d="M 89.285156 63.574219 L 145.136719 0 L 131.90625 0 L 83.390625 55.191406 L 44.671875 0 L 0 0 L 58.566406 83.464844 L 0 150.125 L 13.230469 150.125 L 64.429688 91.828125 L 105.328125 150.125 L 150 150.125 M 18.003906 9.769531 L 38.328125 9.769531 L 131.894531 140.835938 L 111.566406 140.835938 " />
+                </g>
+            </svg>
+</span>
+        </div>
+        <div>
+            <div>Cause A Change</div>
+            <div>Home</div>
+            <div>About</div>
+            <div>Collections</div>
+        </div>
+        <div>
+            Copyright 2024 ACTIVIST
+        </div>
+     </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const menu = document.getElementById('menu');
+        const cartBtn = document.getElementById('cart-btn');
+        const closeCartBtn = document.getElementById('close-cart');
+        const cart = document.getElementById('cart');
+        const overlay = document.getElementById('overlay');
+
+        menuBtn.addEventListener('click', () => {
+            menu.classList.add('active');
+            overlay.style.display = 'block';
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            menu.classList.remove('active');
+            overlay.style.display = 'none';
+        });
+
+        cartBtn.addEventListener('click', () => {
+            cart.classList.add('active');
+            overlay.style.display = 'block';
+        });
+
+        closeCartBtn.addEventListener('click', () => {
+            cart.classList.remove('active');
+            overlay.style.display = 'none';
+        });
+
+        overlay.addEventListener('click', () => {
+            menu.classList.remove('active');
+            cart.classList.remove('active');
+            overlay.style.display = 'none';
+        });
+    </script>
+
+
+</html>
