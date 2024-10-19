@@ -20,10 +20,10 @@
             
             border: 1px solid #ccc;
             border-radius: 15px;
-            background-color: #f9f9f9;
+           
            
             font-family: Arial, sans-serif;
-            font-size: 18px;
+           
             color: #333;
             text-align: center;
         }
@@ -130,7 +130,7 @@
     a{
         text-decoration: none;
         color: #000;
-        font-size: bolder;
+       
     }
 
     .product-item:hover {
@@ -221,37 +221,42 @@
         line-height:  1.5;
         color: #212529;
     }
-    /* Sliding menu/cart styles */
-    .slide-menu,
-    .slide-cart {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        width: 50%;
-        max-width: 400px;
-        background-color: #fff;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-        z-index: 1000;
-    }
-    .slide-cart {
-        right: 0;
-        transform: translateX(100%);
-    }
+     /* Sliding menu/cart styles (for desktop view) */
+        .slide-menu,
+        .slide-cart {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            max-width: 400px;
+            background-color: #fff;
+           
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+        }
+    
 
-    .slide-menu.active,
-    .slide-cart.active {
-        transform: translateX(0);
-    }
+        .slide-cart {
+            right: 0;
+            transform: translateX(100%);
+        }
 
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        font-size: 20px;
-        cursor: pointer;
-    }
+        .slide-menu.active {
+            transform: translateX(0);
+        }
 
+        .slide-cart.active {
+            transform: translateX(0);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
     /* Hover and modern effects for categories */
     #catBox span {
         margin: 10px;
@@ -272,25 +277,6 @@
         color: white;
         margin-bottom: -80px;
     }
-/* Sliding Menu Styles */
-.slide-menu {
-
-background-color:#fff;
-color: black;
-
-transition: left 0.3s ease;
-
-padding-top: 60px;
-font-family: 'Arial', sans-serif;
-}
-
-.slide-menu h2 {
-text-align: center;
-margin-bottom: 30px;
-font-size: 24px;
-letter-spacing: 2px;
-color:black;
-}
 
 .slide-menu ul {
 list-style-type: none;
@@ -305,27 +291,16 @@ text-align: center;
 .slide-menu ul li a {
 color: black;
 text-decoration: none;
-font-size: 18px;
+
 transition: color 0.2s ease;
+line-height: 1rem;
 }
 
 
 
-/* Close Button Styles */
-.close-btn {
-position: absolute;
-top: 20px;
-right: 20px;
-font-size: 30px;
-cursor: pointer;
-color: white;
-transition: color 0.2s ease;
-color:black;
-}
 
-.close-btn:hover {
-color: #f39c12;
-}
+
+
 
 /* Open Button Styles */
 .open-btn {
@@ -350,6 +325,9 @@ color: #f39c12;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     padding: 5px;
+}
+.slide-cart,.slide-menu{
+    width: 100%;
 }
 
 .product-item {
@@ -413,26 +391,27 @@ color: #f39c12;
 
     <!-- Sliding Menu -->
     <div class="slide-menu" id="menu">
-        <span class="close-btn" id="close-menu">&times;</span>
-        <h2>Menu</h2>
+        <div style="display: flex; justify-content: space-between;">
+            <span class="close-btn" id="close-menu">&times;</span>
+            <div style="padding-left: 6.5px; font-size: 20px; padding-top: 12.5px;">Menu</div>
+        </div>
+        <hr>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="#">Gallery</a></li>
+            <li><a href="{% url 'homePage' %}">Home</a></li>
+            <li><a href="{% url 'shop' %}">Shop</a></li>
+            <li><a href="{% url 'gallery' %}">Gallery</a></li>
         </ul>
     </div>
-
+    
     <!-- Sliding Cart -->
-<div class="slide-cart" id="cart" style="overflow: scroll;">
-<div style="display: flex; justify-content: space-between;">
-        <span class="close-btn" id="close-cart" style=" margin-bottom: 21px;">&times;</span>
-        <div id="bag-header" style="padding: 6.5px; font-size: 20px; margin-top: 21px;">CART</div>
-</div>
-    <hr>
-    <div id="cartBox">
-
+    <div class="slide-cart" id="cart">
+        <span class="close-btn" id="close-cart">&times;</span>
+        <div id="bag-header" style="padding-left:6.5px; font-size: 20px; padding-top: 12.5px;">CART</div>
+        <hr>
+        <div id="cartBox">
+    
+        </div>
     </div>
-</div>
 
     <!-- Main content -->
     <main style="margin-top: 150px;">
@@ -610,9 +589,9 @@ color: #f39c12;
                 });
                 const checkoutButton = `
         <div style="text-align: center; margin: 20px;">
-            <button onclick="checkout()" style="padding: 10px 20px; width:100%; background-color: #228B22; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                <a href="{% url 'checkout' %}">       <button style="padding: 10px 20px; width:100%; background-color: #228B22; color: white; border: none; border-radius: 5px; cursor: pointer;">
                 Checkout
-            </button>
+            </button></a>
         </div>`;
                 cartBox.innerHTML += checkoutButton;  // Append the checkout button
             }
@@ -624,11 +603,7 @@ color: #f39c12;
             // Add the checkout button below the last cart item
       
         // Placeholder function for checkout action
-        function checkout() {
-            alert('Proceeding to checkout...');
-            // You can implement your checkout logic here
-        }
-
+      
         function removeFromCart(productId) {
             // Retrieve the current cart from localStorage
             let cart = JSON.parse(localStorage.getItem('cart')) || [];

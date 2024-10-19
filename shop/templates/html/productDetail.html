@@ -15,6 +15,24 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/productDetail.css' %}" rel="stylesheet" />
     <style>
+             /*empty cart*/ 
+            .empty-cart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+           
+            margin: 50px auto;
+            
+            border: 1px solid #ccc;
+            border-radius: 15px;
+           
+           
+            font-family: Arial, sans-serif;
+           
+            color: #333;
+            text-align: center;
+        }
         .dots-container {
             text-align: center;
             margin-top: 10px;
@@ -49,6 +67,28 @@
             transition: transform 0.3s ease-in-out;
             z-index: 1000;
         }
+        
+        .slide-menu ul {
+        list-style-type: none;
+        padding: 0;
+        }
+
+        .slide-menu ul li {
+        margin: 20px 0;
+        text-align: center;
+        }
+
+        .slide-menu ul li a {
+        color: black;
+        text-decoration: none;
+        font-size: 18px;
+        transition: color 0.2s ease;
+        }
+
+
+
+
+
 
         .slide-cart {
             right: 0;
@@ -100,7 +140,7 @@
             border-bottom: 1px solid #cccccc;
             position: fixed;
             width: 100%;
-            z-index: 100;
+           
         }
 
         .header-logo {
@@ -379,13 +419,15 @@
     </a>
     <!-- Sliding Menu -->
     <div class="slide-menu" id="menu">
-        <span class="close-btn" id="close-menu">&times;</span>
-        <h2>Menu</h2>
+        <div style="display: flex; justify-content: space-between;">
+            <span class="close-btn" id="close-menu">&times;</span>
+            <div style="padding-left: 6.5px; font-size: 20px; padding-top: 12.5px;">Menu</div>
+        </div>
+        <hr>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'homePage' %}">Home</a></li>
+            <li><a href="{% url 'shop' %}">Shop</a></li>
+            <li><a href="{% url 'gallery' %}">Gallery</a></li>
         </ul>
     </div>
     
@@ -613,49 +655,48 @@
 <script>
 
     function displayCartItems() {
-            let cartBox = document.getElementById('cartBox');  // Div to display cart items
-            cartBox.innerHTML = '';  // Clear existing content
+        let cartBox = document.getElementById('cartBox');  // Div to display cart items
+        cartBox.innerHTML = '';  // Clear existing content
 
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart.length > 0) {
             cart.forEach(item => {
                 // Create HTML for each cart item
                 let cartItemDiv = `
-        <div class="cart-item" style="border: 1px solid #ddd; border-radius: 8px; padding: 10px; margin: 10px; display: flex; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: relative;">
-            <img src="${item.image_url}" alt="Product Image" width="100" style="border-radius: 8px; margin-right: 15px;">
-            <div style="flex: 1; ">
-             <div style="display:flex; gap:5px;">
-                   <p style="margin: 0; font-weight: bold; font-size: 14px;">${item.product_name}</p>
-                <p style="margin: 0; font-size: 14px; "> x${item.quantity}</p>
-            </div>
-                <p style="margin: 0; font-size: 14px;">Size: ${item.selectedSize}</p>
-                <p style="margin: 0; font-weight: bold; font-size: 14px;">Price: GHS ${item.price}</p>
-            </div>
-            <button class="close-button" onclick="removeFromCart('${item.product_id_date}')" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 16px; color: #FF5722;">&times;</button>
-        </div>
-        <hr style="border: 1px solid #f0f0f0;">
-        `;
+                    <div class="cart-item" style="padding: 10px; margin: 10px; display: flex; align-items: center;  position: relative;">
+                        <img src="${item.image_url}" alt="Product Image" width="100" style="border-radius: 8px; margin-right: 15px;">
+                        <div style="flex: 1; ">
+                        <div style="display:flex; gap:5px;">
+                            <p style="margin: 0; font-weight: bold; font-size: 14px;">${item.product_name}</p>
+                            <p style="margin: 0; font-size: 14px; "> x${item.quantity}</p>
+                        </div>
+                        <div style='display:flex; justify-content:space-between;'>
+                        <p style="margin: 0; font-size: 14px;">${item.selectedSize}</p>
+                            <p style="margin: 0; font-size: 14px;"> GHS ${item.price}</p>
+                        </div>
+                        </div>
+                        <button class="close-button" onclick="removeFromCart('${item.product_id_date}')" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 16px; color: #FF5722;">&times;</button>
+                    </div>
+                    `;
 
                 cartBox.innerHTML += cartItemDiv;  // Add the cart item to the cart box
             });
-
-            // Add the checkout button below the last cart item
-            if (cart.length > 0) {
-                const checkoutButton = `
+            const checkoutButton = `
         <div style="text-align: center; margin: 20px;">
-            <button onclick="checkout()" style="padding: 10px 20px; width:100%; background-color: #228B22; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                <a href="{% url 'checkout' %}">       <button style="padding: 10px 20px; width:100%; background-color: #228B22; color: white; border: none; border-radius: 5px; cursor: pointer;">
                 Checkout
-            </button>
+            </button></a>
         </div>`;
-                cartBox.innerHTML += checkoutButton;  // Append the checkout button
-            }
+            cartBox.innerHTML += checkoutButton;  // Append the checkout button
         }
+        else {
+            cartBox.innerHTML = '<div class="empty-cart">Nothing in Cart</div>'
+        }
+    }
 
-        // Placeholder function for checkout action
-        function checkout() {
-            alert('Proceeding to checkout...');
-            // You can implement your checkout logic here
-        }
+    // Add the checkout button below the last cart item
+
+    // Placeholder function for checkout action
 
     function removeFromCart(productId) {
         // Retrieve the current cart from localStorage
@@ -671,31 +712,30 @@
         displayCartItems();
     }
 
-        // Load and display cart items when the page loads
-        window.onload = displayCartItems;
-
-
-    addToCartDiv = document.getElementById('addToCartDiv')
-    product_id = '{{product.unique_id}}'
-    image_url = '{{product.image.url}}'
-    product_name ='{{product.name}}'
-    addToCartDiv.onclick = () => {
-        product_id_date = `${Date.now()}_${Math.floor(Math.random() * 1000)}`
-        quantity = document.getElementById('inputQuantity').value
-        let selectedBox = document.querySelector('.size-box.selected');
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        price = Number(quantity * {{ product.price }});
+    // Load and display cart items when the page loads
+    window.onload = displayCartItems;
+    
+        addToCartDiv = document.getElementById('addToCartDiv')
+        product_id = '{{product.unique_id}}'
+        image_url = '{{product.image.url}}'
+        product_name = '{{product.name}}'
+        addToCartDiv.onclick = () => {
+            product_id_date = `${Date.now()}_${Math.floor(Math.random() * 1000)}`
+            quantity = document.getElementById('inputQuantity').value
+            let selectedBox = document.querySelector('.size-box.selected');
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            price = Number(quantity * {{ product.price }});
 
         // Store the selected size value
         let selectedSize = selectedBox ? selectedBox.innerText : null;
 
         if (selectedSize) {
-        // none
+            // none
         } else {
             return alert('no size');
         }
-      
-        item ={product_id_date,product_name,quantity,image_url,selectedSize,price}
+
+        item = { product_id_date, product_name, quantity, image_url, selectedSize, price }
         cart.push(item);
         localStorage.setItem('cart', JSON.stringify(cart));
         displayCartItems()
@@ -703,8 +743,6 @@
     
     }
 
-
-    
 
 </script>
     <script>
