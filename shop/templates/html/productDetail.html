@@ -19,6 +19,7 @@
             text-align: center;
             margin-top: 10px;
         }
+   
 
         .dot {
             height: 10px;
@@ -94,12 +95,12 @@
             padding: 0 20px;
             background-color: #fff;
            
-            position: relative;
             padding-top: 11px;
             padding-bottom: 11px;
             border-bottom: 1px solid #cccccc;
             position: fixed;
             width: 100%;
+            z-index: 100;
         }
 
         .header-logo {
@@ -114,26 +115,7 @@
         .cart-button {
             cursor: pointer;
         }
-        /* Size selection styles */
-        .size-box {
-            display: inline-block;
-            padding: 3px 8px;
-            margin: 5px;
-            border: 1px solid #000;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #f0f0f0;
-            transition: background-color 0.3s ease;
-        }
-
-        .size-box:hover {
-            background-color: #ddd;
-        }
-
-        .size-box.selected {
-            background-color: #333;
-            color: #fff;
-        }
+        
 
         /* Hamburger menu for mobile */
         .menu-button {
@@ -162,6 +144,9 @@
             margin: 0 auto;
             z-index: 10;
             margin-bottom: 140px;
+        }
+        #drop-down-select{
+            margin:15px;
         }
 
         /* Footer styles */
@@ -228,25 +213,56 @@
             /* Ensures the image scales nicely */
             border-radius: 8px;
         }
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    width: 200px;
+    margin: 0 auto;
+    cursor: pointer;
+    text-align: center;
+}
 
+/* The selected item */
+.dropdown-selected {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Dropdown options (initially hidden) */
+.dropdown-options {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 100%;
+    border: 1px solid #ccc;
+    z-index: 10;
+}
+
+.size-box {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.size-box:hover {
+    background-color: #f1f1f1;
+}
+
+/* Add a selected style */
+.size-box.selected {
+    background-color: #dcdcdc;
+   
+}
+    #optionBox{
+        width: 70%;
         
-        #optionBox{
-            margin-bottom:15px;
-        }
-        #addToCartm{
-            margin-bottom: 30px;
-        }
-        select{
-            text-align: center;
-            width:200px;
-             appearance: none;
-    background-color: #e9e9ed; /* Custom arrow */
-    background-size: 10px; /* Adjust size as needed */
-    padding-right: 20px; /* Space for the custom arrow */
-    border: 1px solid #8f8f9d;
-    padding: 0 10px;
-    border-radius: 25px;
-        }
+    }
+    #drop-down-select{
+        border-radius: 15px;
+    }
+
+
 
         @media (min-width:751px){
 /* Styling for side images */
@@ -384,7 +400,7 @@
     </div>
 
     <!-- Product section -->
-    <section class="py-5" style="margin-top: -110px;">
+    <section class="py-5" >
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <div class="col-md-6" style="display: flex;">
@@ -409,21 +425,25 @@
                     <div class="fs-5 mb-5">
                         <span>Ghs{{product.price}}0</span>
                     </div>
-                    <select name="" id="optionBox" >
-                            <option class="size-box" id="size-3XL" onclick="selectSize('3XL')">3XL</option>
-                            <option class="size-box" id="size-M" onclick="selectSize('M')">M</option>
-                            <option class="size-box" id="size-L" onclick="selectSize('L')">L</option>
-                            <option class="size-box" id="size-XL" onclick="selectSize('XL')">XL</option>
-                            <option class="size-box" id="size-2XL" onclick="selectSize('2XL')">2XL</option>
+                    <div id="optionBox" class="dropdown">
+                        <div class="dropdown-selected" id="drop-down-select" onclick="toggleDropdown()">Select size</div>
+                        <div class="dropdown-options" id="dropdownOptions">
+                            <div class="size-box" id="size-3XL" onclick="selectSize('3XL')">3XL</div>
+                            <div class="size-box" id="size-M" onclick="selectSize('M')">M</div>
+                            <div class="size-box" id="size-L" onclick="selectSize('L')">L</div>
+                            <div class="size-box" id="size-XL" onclick="selectSize('XL')">XL</div>
+                            <div class="size-box" id="size-2XL" onclick="selectSize('2XL')">2XL</div>
+                        </div>
+                    </div>
 
-                    </select>
-                        <div class="d-flex" id="addToCartm">
+                        <div class="d-flex" id="addToCartm" style="margin: 15px;">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
                             <button class="btn btn-outline-dark flex-shrink-0" type="button" id="addToCartDiv">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </button>
                         </div>
+
                    <div id="infoBox">
                     <div style="border-top: 0.2px solid black; display:flex; justify-content: space-between;"><span>Description</span><span>+</span></div>
                     <div style="border-top: 0.2px solid black; display:flex; justify-content: space-between;"><span>Details</span><span>+</span></div>
@@ -511,7 +531,31 @@
         <p class="copyright">&copy; 2024 ACTIVIST</p>
     </div>
 </footer>
+<script>
+    function toggleDropdown() {
+            const options = document.getElementById("dropdownOptions");
+            options.style.display = options.style.display === "block" ? "none" : "block";
+        }
 
+        function selectSize(size) {
+            document.querySelector(".dropdown-selected").innerText = size;
+            toggleDropdown();
+
+            // Mark the selected size
+            document.querySelectorAll('.size-box').forEach(box => box.classList.remove('selected'));
+            document.getElementById(`size-${size}`).classList.add('selected');
+            document.getElementById("dropdownOptions").style.display = "none";
+        }
+
+        // Close the dropdown if clicked outside
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById("optionBox");
+            if (!dropdown.contains(event.target)) {
+                document.getElementById("dropdownOptions").style.display = "none";
+            }
+        });
+
+</script>
 <script>
     const menuBtn = document.getElementById('menu-btn');
     const cartBtn = document.getElementById('cart-btn');
@@ -688,6 +732,8 @@
             // Add 'selected' class to the clicked size box
             const selectedBox = document.getElementById('size-' + size);
             selectedBox.classList.add('selected');
+            document.getElementById('drop-down-select').innerText = selectedBox.innerText
+            document.getElementById('dropdownOptions').style.display='none'
         }
     </script>
 

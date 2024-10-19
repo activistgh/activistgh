@@ -19,6 +19,7 @@
             margin-bottom: 70px;
             
         }
+
           /* Hamburger menu for mobile */
         .menu-button {
             
@@ -79,7 +80,6 @@
             border-bottom: 1px solid #cccccc;
            
         }
-
         .header-logo h1 {
             margin: 0;
         }
@@ -173,9 +173,35 @@
             height: 50px;
         } */
 
-        #logo-footer{
+        /* Footer styles */
+        /* footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            padding: 0;
+            color: #fff;
+            background-color: white;
+          
+        }
+
+        .footer-logo img {
+            height: 50px;
+        } */
+    #logo-footer{
             max-width: 20%;
             width: 33%;
+        }
+        footer div{
+            font-family: sans-serif;
+            font-size:1rem;
+            font-weight:400;
+            line-height:  1.5;
+            color: #212529;
         }
         /* Sliding menu/cart styles */
         .slide-menu,
@@ -190,7 +216,6 @@
             transition: transform 0.3s ease-in-out;
             z-index: 1000;
         }
-
         .slide-cart {
             right: 0;
             transform: translateX(100%);
@@ -310,32 +335,32 @@
     color: #f39c12;
 }
 
-        /* Responsive styles */
-        @media screen and (max-width: 768px) {
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-                padding: 5px;
-            }
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 5px;
+    }
 
-            .product-item {
-                padding: 8px;
-                font-size: 14px;
-            }
-        }
+    .product-item {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
 
-        @media screen and (max-width: 480px) {
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 5px;
-                padding: 5px;
-            }
+@media screen and (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+        padding: 5px;
+    }
 
-            .product-item {
-                padding: 6px;
-                font-size: 12px;
-            }
-        }
+    .product-item {
+        padding: 6px;
+        font-size: 12px;
+    }
+}
     </style>
 </head>
 
@@ -347,30 +372,30 @@
 
     <!-- Header -->
     <header>
-            <div class="menu-button" id="menu-btn">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+        <div class="menu-button" id="menu-btn">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <div class="header-logo">
             <img src="{% static 'logo.svg' %}" alt="Footer Logo">
         </div>
         <div class="cart-button">
-    <svg width="50px" id="cart-btn" height="50px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-        <g id="SVGRepo_iconCarrier">
-            <path
-                d="M3.864 16.4552C4.40967 18.6379 4.68251 19.7292 5.49629 20.3646C6.31008 21 7.435 21 9.68486 21H14.3155C16.5654 21 17.6903 21 18.5041 20.3646C19.3179 19.7292 19.5907 18.6379 20.1364 16.4552C20.9943 13.0234 21.4233 11.3075 20.5225 10.1538C19.6217 9 17.853 9 14.3155 9H9.68486C6.14745 9 4.37875 9 3.47791 10.1538C2.94912 10.831 2.87855 11.702 3.08398 13"
-                stroke="#000000" stroke-width="0.672" stroke-linecap="round"></path>
-            <path
-                d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
-                stroke="#000000" stroke-width="0.672"></path>
-            <path
-                d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
-                stroke="#000000" stroke-width="0.672"></path>
-        </g>
-    </svg>
+            <svg width="50px" id="cart-btn" height="50px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M3.864 16.4552C4.40967 18.6379 4.68251 19.7292 5.49629 20.3646C6.31008 21 7.435 21 9.68486 21H14.3155C16.5654 21 17.6903 21 18.5041 20.3646C19.3179 19.7292 19.5907 18.6379 20.1364 16.4552C20.9943 13.0234 21.4233 11.3075 20.5225 10.1538C19.6217 9 17.853 9 14.3155 9H9.68486C6.14745 9 4.37875 9 3.47791 10.1538C2.94912 10.831 2.87855 11.702 3.08398 13"
+                        stroke="#000000" stroke-width="0.672" stroke-linecap="round"></path>
+                    <path
+                        d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                        stroke="#000000" stroke-width="0.672"></path>
+                    <path
+                        d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                        stroke="#000000" stroke-width="0.672"></path>
+                </g>
+            </svg>
         </div>
     </header>
 
@@ -427,8 +452,7 @@
 </body>
 
 
-    <!-- JavaScript to handle the menu and cart sliding -->
-<footer style="text-align: center; padding: 20px; background-color: #000;">
+    <footer style="text-align: center; padding: 20px; background-color: #000;">
     <!-- Centering the logo -->
     <div style="display: flex; justify-content: center; margin-bottom: 20px;">
         <img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo" style="max-width: 150px;">
@@ -463,8 +487,8 @@
 
         <!-- X (Twitter) Icon -->
         <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="30px" height="30px" style="margin-top: 9px;" viewBox="0 0 150 150"
-                version="1.1">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="30px" height="30px" style="margin-top: 9px;"
+                viewBox="0 0 150 150" version="1.1">
                 <path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;"
                     d="M 89.285156 63.574219 L 145.136719 0 L 131.90625 0 L 83.390625 55.191406 L 44.671875 0 L 0 0 L 58.566406 83.464844 L 0 150.125 L 13.230469 150.125 L 64.429688 91.828125 L 105.328125 150.125 L 150 150.125 M 18.003906 9.769531 L 38.328125 9.769531 L 131.894531 140.835938 L 111.566406 140.835938 ">
                 </path>
@@ -480,7 +504,7 @@
 
     <!-- Footer Copyright -->
     <div>
-    <p class="copyright">&copy; 2024 ACTIVIST</p>
+        <p class="copyright">&copy; 2024 ACTIVIST</p>
     </div>
 </footer>
 
@@ -495,22 +519,21 @@
                 cart.forEach(item => {
                     // Create HTML for each cart item
                     let cartItemDiv = `
-        <div class="cart-item" style="padding: 10px; margin: 10px; display: flex; align-items: center;  position: relative;">
-            <img src="${item.image_url}" alt="Product Image" width="100" style="border-radius: 8px; margin-right: 15px;">
-            <div style="flex: 1; ">
-             <div style="display:flex; gap:5px;">
-                   <p style="margin: 0; font-weight: bold; font-size: 14px;">${item.product_name}</p>
-                <p style="margin: 0; font-size: 14px; "> x${item.quantity}</p>
-            </div>
-              <div style='display:flex; justify-content:space-between;'>
-              <p style="margin: 0; font-size: 14px;">${item.selectedSize}</p>
-                <p style="margin: 0; font-size: 14px;"> GHS ${item.price}</p>
-            </div>
-            </div>
-            <button class="close-button" onclick="removeFromCart('${item.product_id_date}')" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 16px; color: #FF5722;">&times;</button>
-        </div>
-    
-        `;
+                    <div class="cart-item" style="padding: 10px; margin: 10px; display: flex; align-items: center;  position: relative;">
+                        <img src="${item.image_url}" alt="Product Image" width="100" style="border-radius: 8px; margin-right: 15px;">
+                        <div style="flex: 1; ">
+                        <div style="display:flex; gap:5px;">
+                            <p style="margin: 0; font-weight: bold; font-size: 14px;">${item.product_name}</p>
+                            <p style="margin: 0; font-size: 14px; "> x${item.quantity}</p>
+                        </div>
+                        <div style='display:flex; justify-content:space-between;'>
+                        <p style="margin: 0; font-size: 14px;">${item.selectedSize}</p>
+                            <p style="margin: 0; font-size: 14px;"> GHS ${item.price}</p>
+                        </div>
+                        </div>
+                        <button class="close-button" onclick="removeFromCart('${item.product_id_date}')" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 16px; color: #FF5722;">&times;</button>
+                    </div>
+                    `;
 
                     cartBox.innerHTML += cartItemDiv;  // Add the cart item to the cart box
                 });
