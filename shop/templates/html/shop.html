@@ -116,7 +116,7 @@
         max-width: 1200px;
         margin: 0 auto;
         z-index: 10;
-        margin-top: 150px;
+      
         /* Ensures it moves on top of the logo */
     }
 
@@ -259,16 +259,13 @@
         transition: color 0.3s, transform 0.3s;
     }
 
-    #catBox span:hover {
+    /* #catBox span:hover {
         color: #ff4500;
         transform: scale(1.1);
-    }
+    } */
 
-    #active {
-        border-bottom: 2px solid grey;
-        color: #000;
-        font-weight: bold;
-        padding-bottom: 5px;
+    .activeMenu {
+        background-color: #f7f7f7;
     }
     footer{
         background-color: #1e1e1e;
@@ -437,16 +434,16 @@ color: #f39c12;
 
     <!-- Main content -->
     <main style="margin-top: 150px;">
-        <div id="maincat" style="width: 100%;">
-            <div id="categoriesBox" style="display: flex; max-width: 1200px;  justify-content: space-between; margin-left: auto; margin-right: auto;">
+        <div id="maincat" style="width: 100%; ">
+            <div id="categoriesBox" style="display: flex; max-width: 1200px; padding-bottom: 18px; border-bottom: 1px solid #e3e6ea; justify-content: space-between; margin-left: auto; margin-right: auto;">
                 <div id="categories" style="visibility: hidden;">
                     <span>Categories</span>
                 </div>
                 <div id="catBox">
-                    <span id="all">All</span>
-                    <span id="hoodies">Hoodies</span>
-                    <span id="tees">Tees</span>
-                    <span id="shorts">Shorts</span>
+                    <span id="all" class="activeMenu" style="padding: 10px; border: 1px solid #e3e6ea; border-radius: 15px;">All</span>
+                    <span id="hoodies" style="padding: 10px; border: 1px solid #e3e6ea; border-radius: 15px;">Hoodies</span>
+                    <span id="tees" style="padding: 10px; border: 1px solid #e3e6ea; border-radius:15px;">Tees</span>
+                    <span id="shorts" style="padding: 10px; border: 1px solid #e3e6ea; border-radius:15px;">Shorts</span>
                 </div>
             </div>
         </div>
@@ -538,8 +535,17 @@ color: #f39c12;
             products.forEach((product) => {
                 product.style.display = 'block';
             });
+            all.classList.add('activeMenu')
+            tee.classList.remove('activeMenu')
+            hoodie.classList.remove('activeMenu')
+            short.classList.remove('activeMenu')
+
         }
     tee.onclick = () => {
+        all.classList.remove('activeMenu')
+        tee.classList.add('activeMenu')
+        hoodie.classList.remove('activeMenu')
+        short.classList.remove('activeMenu')
         products.forEach((product) => {
             product.style.display = 'none';
         });
@@ -549,6 +555,10 @@ color: #f39c12;
     };
     
     short.onclick =  () =>{
+        all.classList.remove('activeMenu')
+        tee.classList.remove('activeMenu')
+        hoodie.classList.remove('activeMenu')
+        short.classList.add('activeMenu')
             products.forEach((product) => {
             product.style.display = 'none';
         });
@@ -557,6 +567,10 @@ color: #f39c12;
         });
     }
     hoodie.onclick = () => {
+        all.classList.remove('activeMenu')
+        tee.classList.remove('activeMenu')
+        hoodie.classList.add('activeMenu')
+        short.classList.remove('activeMenu')
             products.forEach((product) => {
             product.style.display = 'none';
         });
@@ -677,6 +691,8 @@ color: #f39c12;
             overlay.style.display = 'none';
         });
     </script>
+    <script>
 
+    </script>
 
 </html>
