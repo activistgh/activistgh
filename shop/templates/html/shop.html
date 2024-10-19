@@ -75,7 +75,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 10;
+           
             border-bottom: 1px solid #cccccc;
            
         }
@@ -232,6 +232,83 @@
             color: white;
             margin-bottom: -80px;
         }
+/* Sliding Menu Styles */
+.slide-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #2c3e50;
+    color: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    padding-top: 60px;
+    font-family: 'Arial', sans-serif;
+}
+
+.slide-menu h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: #f39c12;
+}
+
+.slide-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.slide-menu ul li {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.slide-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.2s ease;
+}
+
+.slide-menu ul li a:hover {
+    color: #f39c12;
+    text-shadow: 0px 0px 8px #f39c12;
+}
+
+/* Close Button Styles */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+    color: #f39c12;
+}
+
+/* Open Button Styles */
+.open-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.open-btn:hover {
+    color: #f39c12;
+}
 
         /* Responsive styles */
         @media screen and (max-width: 768px) {
@@ -279,11 +356,21 @@
             <img src="{% static 'logo.svg' %}" alt="Footer Logo">
         </div>
         <div class="cart-button">
-            <button class="btn btn-outline-dark" id="cart-btn" type="submit">
-                <i class="bi-cart-fill me-1"></i>
-                Cart
-                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-            </button>
+    <svg width="50px" id="cart-btn" height="50px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+            <path
+                d="M3.864 16.4552C4.40967 18.6379 4.68251 19.7292 5.49629 20.3646C6.31008 21 7.435 21 9.68486 21H14.3155C16.5654 21 17.6903 21 18.5041 20.3646C19.3179 19.7292 19.5907 18.6379 20.1364 16.4552C20.9943 13.0234 21.4233 11.3075 20.5225 10.1538C19.6217 9 17.853 9 14.3155 9H9.68486C6.14745 9 4.37875 9 3.47791 10.1538C2.94912 10.831 2.87855 11.702 3.08398 13"
+                stroke="#000000" stroke-width="0.672" stroke-linecap="round"></path>
+            <path
+                d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
+                stroke="#000000" stroke-width="0.672"></path>
+            <path
+                d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
+                stroke="#000000" stroke-width="0.672"></path>
+        </g>
+    </svg>
         </div>
     </header>
 
@@ -300,12 +387,14 @@
     </div>
 
     <!-- Sliding Cart -->
-    <div class="slide-cart" id="cart">
-        <span class="close-btn" id="close-cart">&times;</span>
-        <div id="bag-header">YOUR BAG</div>
-        <hr>
-        <p>Your cart is empty!</p>
+<div class="slide-cart" id="cart" style="overflow: scroll;">
+    <span class="close-btn" id="close-cart">&times;</span>
+    <div id="bag-header" style="padding: 6.5px; font-size: 20px;">CART</div>
+    <hr>
+    <div id="cartBox">
+
     </div>
+</div>
 
     <!-- Main content -->
     <main>
@@ -336,63 +425,144 @@
         </div>
     </main>
 </body>
-    <!-- Footer -->
-    <!-- <footer>
-        <div class="footer-logo">
-            <img src="{% static 'logo.svg' %}" alt="Footer Logo">
-        </div>
-    </footer> -->
+
 
     <!-- JavaScript to handle the menu and cart sliding -->
-     <footer>
-        <div><img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo"></div>
-        <div>
-            <span><svg width="140px" height="140px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z"
-                        stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z"
-                        stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)" fill="#ffffff"></rect>
-                    <rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)" stroke="#ffffff"
-                        stroke-linecap="round"></rect>
-                </g>
-            </svg></span>
-            <span><svg fill="#ffffff" width="111px" height="111px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                    <title>facebook</title>
-                    <path
-                        d="M30.996 16.091c-0.001-8.281-6.714-14.994-14.996-14.994s-14.996 6.714-14.996 14.996c0 7.455 5.44 13.639 12.566 14.8l0.086 0.012v-10.478h-3.808v-4.336h3.808v-3.302c-0.019-0.167-0.029-0.361-0.029-0.557 0-2.923 2.37-5.293 5.293-5.293 0.141 0 0.281 0.006 0.42 0.016l-0.018-0.001c1.199 0.017 2.359 0.123 3.491 0.312l-0.134-0.019v3.69h-1.892c-0.086-0.012-0.185-0.019-0.285-0.019-1.197 0-2.168 0.97-2.168 2.168 0 0.068 0.003 0.135 0.009 0.202l-0.001-0.009v2.812h4.159l-0.665 4.336h-3.494v10.478c7.213-1.174 12.653-7.359 12.654-14.814v-0z">
-                    </path>
-                </g>
-            </svg></span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" xmlns:xlink="http://www.w3.org/1999/xlink" width="111px" height="111px"
-                viewBox="0 0 150 150" version="1.1">
-                <g id="surface1">
-                    <path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;"
-                        d="M 89.285156 63.574219 L 145.136719 0 L 131.90625 0 L 83.390625 55.191406 L 44.671875 0 L 0 0 L 58.566406 83.464844 L 0 150.125 L 13.230469 150.125 L 64.429688 91.828125 L 105.328125 150.125 L 150 150.125 M 18.003906 9.769531 L 38.328125 9.769531 L 131.894531 140.835938 L 111.566406 140.835938 " />
-                </g>
-            </svg>
-</span>
-        </div>
-        <div>
-            <div>Cause A Change</div>
-            <div>Home</div>
-            <div>About</div>
-            <div>Collections</div>
-        </div>
-        <div>
-            Copyright 2024 ACTIVIST
-        </div>
-     </footer>
+<footer style="text-align: center; padding: 20px; background-color: #000;">
+    <!-- Centering the logo -->
+    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+        <img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo" style="max-width: 150px;">
+    </div>
 
+    <!-- Social media icons -->
+    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+        <!-- Instagram Icon -->
+        <span style="margin-right: 25px;">
+            <svg width="50px" height="50px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z"
+                    stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z"
+                    stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)" fill="#ffffff"></rect>
+                <rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)" stroke="#ffffff"
+                    stroke-linecap="round"></rect>
+            </svg>
+        </span>
+
+        <!-- Facebook Icon -->
+        <span style="margin-right: 30px; margin-top: 7px;">
+            <svg fill="#ffffff" width="35px" height="35px" viewBox="0 0 32 32" version="1.1"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M30.996 16.091c-0.001-8.281-6.714-14.994-14.996-14.994s-14.996 6.714-14.996 14.996c0 7.455 5.44 13.639 12.566 14.8l0.086 0.012v-10.478h-3.808v-4.336h3.808v-3.302c-0.019-0.167-0.029-0.361-0.029-0.557 0-2.923 2.37-5.293 5.293-5.293 0.141 0 0.281 0.006 0.42 0.016l-0.018-0.001c1.199 0.017 2.359 0.123 3.491 0.312l-0.134-0.019v3.69h-1.892c-0.086-0.012-0.185-0.019-0.285-0.019-1.197 0-2.168 0.97-2.168 2.168 0 0.068 0.003 0.135 0.009 0.202l-0.001-0.009v2.812h4.159l-0.665 4.336h-3.494v10.478c7.213-1.174 12.653-7.359 12.654-14.814v-0z">
+                </path>
+            </svg>
+        </span>
+
+        <!-- X (Twitter) Icon -->
+        <span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="30px" height="30px" style="margin-top: 9px;" viewBox="0 0 150 150"
+                version="1.1">
+                <path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;"
+                    d="M 89.285156 63.574219 L 145.136719 0 L 131.90625 0 L 83.390625 55.191406 L 44.671875 0 L 0 0 L 58.566406 83.464844 L 0 150.125 L 13.230469 150.125 L 64.429688 91.828125 L 105.328125 150.125 L 150 150.125 M 18.003906 9.769531 L 38.328125 9.769531 L 131.894531 140.835938 L 111.566406 140.835938 ">
+                </path>
+            </svg>
+        </span>
+    </div>
+
+    <!-- Footer Links -->
+    <div style="margin-bottom: 20px;">
+        <div>Cause A Change</div>
+        <div>Gallery</div>
+    </div>
+
+    <!-- Footer Copyright -->
+    <div>
+    <p class="copyright">&copy; 2024 ACTIVIST</p>
+    </div>
+</footer>
+
+<script>
+    
+        function displayCartItems() {
+            let cartBox = document.getElementById('cartBox');  // Div to display cart items
+            cartBox.innerHTML = '';  // Clear existing content
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length > 0 ){
+                cart.forEach(item => {
+                    // Create HTML for each cart item
+                    let cartItemDiv = `
+        <div class="cart-item" style="padding: 10px; margin: 10px; display: flex; align-items: center;  position: relative;">
+            <img src="${item.image_url}" alt="Product Image" width="100" style="border-radius: 8px; margin-right: 15px;">
+            <div style="flex: 1; ">
+             <div style="display:flex; gap:5px;">
+                   <p style="margin: 0; font-weight: bold; font-size: 14px;">${item.product_name}</p>
+                <p style="margin: 0; font-size: 14px; "> x${item.quantity}</p>
+            </div>
+              <div style='display:flex; justify-content:space-between;'>
+              <p style="margin: 0; font-size: 14px;">${item.selectedSize}</p>
+                <p style="margin: 0; font-size: 14px;"> GHS ${item.price}</p>
+            </div>
+            </div>
+            <button class="close-button" onclick="removeFromCart('${item.product_id_date}')" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 16px; color: #FF5722;">&times;</button>
+        </div>
+    
+        `;
+
+                    cartBox.innerHTML += cartItemDiv;  // Add the cart item to the cart box
+                });
+                const checkoutButton = `
+        <div style="text-align: center; margin: 20px;">
+            <button onclick="checkout()" style="padding: 10px 20px; width:100%; background-color: #228B22; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Checkout
+            </button>
+        </div>`;
+                cartBox.innerHTML += checkoutButton;  // Append the checkout button
+            }
+            else{
+                cartBox.innerHTML = '<div> Empty</div>'
+            }
+            }
+            
+            // Add the checkout button below the last cart item
+      
+        // Placeholder function for checkout action
+        function checkout() {
+            alert('Proceeding to checkout...');
+            // You can implement your checkout logic here
+        }
+
+        function removeFromCart(productId) {
+            // Retrieve the current cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Filter out the item to be removed
+            cart = cart.filter(item => item.product_id_date !== productId);
+
+            // Save the updated cart back to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Update the display
+            displayCartItems();
+        }
+
+        // Load and display cart items when the page loads
+        window.onload = displayCartItems;
+
+</script>
     <script>
+        // JavaScript to handle menu slide-in and slide-out
+            document.getElementById('menu-btn').onclick = function () {
+                document.getElementById('menu').style.left = '0';
+            };
+
+            document.getElementById('close-menu').onclick = function () {
+                document.getElementById('menu').style.left = '-250px';
+            };
+
         const menuBtn = document.getElementById('menu-btn');
         const closeMenuBtn = document.getElementById('close-menu');
         const menu = document.getElementById('menu');

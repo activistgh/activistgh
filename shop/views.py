@@ -19,3 +19,6 @@ def productDetail(request,unique_id):
         'relatedImages':relatedImages,
     }
     return render(request,'html/productDetail.html',context)
+
+def checkout(request):
+    return render(request,'html/checkout.html')
