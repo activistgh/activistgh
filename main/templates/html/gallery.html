@@ -49,7 +49,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 1000;
+        z-index: 1;
         border-bottom: 1px solid #cccccc;
         
     }
@@ -81,6 +81,79 @@
             vertical-align: middle;
             width: 100%;
         }
+           /* Sliding menu/cart styles (for desktop view) */
+        .slide-menu,
+        .slide-cart {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            max-width: 400px;
+            background-color: #fff;
+           
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+        }
+        
+        .slide-menu ul {
+        list-style-type: none;
+        padding: 0;
+        }
+
+        .slide-menu ul li {
+        margin: 20px 0;
+        text-align: center;
+        }
+
+        .slide-menu ul li a {
+        color: black;
+        text-decoration: none;
+        font-size: 18px;
+        transition: color 0.2s ease;
+        }
+
+
+
+
+
+
+        .slide-cart {
+            right: 0;
+            transform: translateX(100%);
+        }
+
+        .slide-menu.active {
+            transform: translateX(0);
+        }
+
+        .slide-cart.active {
+            transform: translateX(0);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+      
+        body {
+            margin-bottom: 0px;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 11;
+        }
+
+
 
         /* Responsive layout - makes a two column-layout instead of four columns */
         @media screen and (max-width: 800px) {
@@ -98,6 +171,10 @@
                 max-width: 100%;
             }
         }
+        /*Responsive layout for sliding cart and menu*/
+           @media (min-width:751px){
+
+           }
     </style>
 </head>
 
@@ -153,6 +230,30 @@
     <div style="margin-right: 40px; font-size: 30px;">Gallery</div>
     <div></div>
 </div>
+<!-- Sliding Menu -->
+<div class="slide-menu" id="menu" style="margin-left: -14px;">
+    <div style="display: flex; justify-content: space-between;" style="padding: 0 10px;" >
+        <span class="close-btn" id="close-menu">&times;</span>
+        <div style="padding-left: 6.5px; font-size: 20px; padding-top: 12.5px; padding-bottom: 22.8px;">Menu</div>
+    </div>
+    <div style="height: 1px; border-bottom: 1px solid #cccccc;"></div>
+    <ul>
+        <li><a href="{% url 'homePage' %}">Home</a></li>
+        <li><a href="{% url 'shop' %}">Shop</a></li>
+        <li><a href="{% url 'gallery' %}">Gallery</a></li>
+    </ul>
+</div>
+
+<!-- Sliding Cart -->
+<div class="slide-cart" id="cart">
+    <span class="close-btn" id="close-cart">&times;</span>
+    <div id="bag-header" style="padding-left: 6.5px; font-size: 20px; padding-top: 12.5px; padding-bottom: 22.8px;">CART</div>
+    <div style="height: 1px; border-bottom: 1px solid #cccccc;"></div>
+    <div id="cartBox">
+
+    </div>
+</div>
+
     <div style="display: flex; justify-content: center; width: 100%; margin-top: 60px;">
         <div class="row" style="display: flex; flex-direction: row;justify-content: center;">
             <div class="column">
@@ -193,5 +294,58 @@
         </div>
     </div>
 </body>
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const cartBtn = document.getElementById('cart-btn');
+    const closeMenuBtn = document.getElementById('close-menu');
+    const closeCartBtn = document.getElementById('close-cart');
+    const menu = document.getElementById('menu');
+    const cart = document.getElementById('cart');
+    const overlay = document.getElementById('overlay');
+
+    // Footer buttons
+
+
+    // Show overlay
+    function showOverlay() {
+        overlay.style.display = 'block';
+    }
+
+    // Hide overlay
+    function hideOverlay() {
+        overlay.style.display = 'none';
+    }
+
+    // Open and close menu
+    menuBtn.addEventListener('click', () => {
+        menu.classList.add('active');
+        showOverlay();
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+        menu.classList.remove('active');
+        hideOverlay();
+    });
+
+    // Open and close cart
+    cartBtn.addEventListener('click', () => {
+        cart.classList.add('active');
+        showOverlay();
+    });
+
+    closeCartBtn.addEventListener('click', () => {
+        cart.classList.remove('active');
+        hideOverlay();
+    });
+
+
+
+    // Close the sliding menus when the overlay is clicked
+    overlay.addEventListener('click', () => {
+        menu.classList.remove('active');
+        cart.classList.remove('active');
+        hideOverlay();
+    });
+</script>
 
 </html>
