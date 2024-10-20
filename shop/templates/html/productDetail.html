@@ -15,6 +15,20 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/productDetail.css' %}" rel="stylesheet" />
     <style>
+  
+    
+        /* set content box display to none */
+        .contentBox{
+            padding: 5px;
+            cursor: pointer;
+        }
+        .content {
+            display: none;
+        }
+        .activeContentBox {
+            display: block;
+        }
+
              /*empty cart*/ 
             .empty-cart {
             display: flex;
@@ -122,7 +136,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             display: none;
-            z-index: 1;
+            z-index: 11;
         }
 
 
@@ -140,6 +154,7 @@
             border-bottom: 1px solid #cccccc;
             position: fixed;
             width: 100%;
+            z-index: 10;
            
         }
 
@@ -182,7 +197,7 @@
             padding: 0 20px;
             max-width: 1200px;
             margin: 0 auto;
-            z-index: 10;
+            
             margin-bottom: 140px;
         }
         #drop-down-select{
@@ -215,7 +230,7 @@
         .product-item {
             padding: 10px;
             text-align: center;
-            z-index: 1;
+           
             background-color: white;
         }
 
@@ -276,7 +291,7 @@
     background-color: #f9f9f9;
     width: 100%;
     border: 1px solid #ccc;
-    z-index: 10;
+    
 }
 
 .size-box {
@@ -373,7 +388,7 @@
     <div class="overlay" id="overlay"></div>
     <div></div>
     <!-- Header -->
-    <header>
+    <header style="margin-top: 0;">
         <div class="menu-button" id="menu-btn" >
             <div></div>
             <div></div>
@@ -403,20 +418,22 @@
         </div>
     </header>
 
-    <a href="{% url 'shop' %}">
+ <div style="position: relative; top: 70px; left: 0;">
+    <a href="{% url 'shop' %}" >
         <div style="padding-left: 17px; margin-bottom: 10px;">
-        <svg width="45px" height="45px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000"
-            stroke-width="0.00024000000000000003">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-                <path
-                    d="M4 10L3.64645 10.3536L3.29289 10L3.64645 9.64645L4 10ZM20.5 18C20.5 18.2761 20.2761 18.5 20 18.5C19.7239 18.5 19.5 18.2761 19.5 18L20.5 18ZM8.64645 15.3536L3.64645 10.3536L4.35355 9.64645L9.35355 14.6464L8.64645 15.3536ZM3.64645 9.64645L8.64645 4.64645L9.35355 5.35355L4.35355 10.3536L3.64645 9.64645ZM4 9.5L14 9.5L14 10.5L4 10.5L4 9.5ZM20.5 16L20.5 18L19.5 18L19.5 16L20.5 16ZM14 9.5C17.5898 9.5 20.5 12.4101 20.5 16L19.5 16C19.5 12.9624 17.0376 10.5 14 10.5L14 9.5Z"
-                    fill="#222222"></path>
-            </g>
-        </svg>
+            <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                stroke="#000000" stroke-width="0.00024000000000000003">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M4 10L3.64645 10.3536L3.29289 10L3.64645 9.64645L4 10ZM20.5 18C20.5 18.2761 20.2761 18.5 20 18.5C19.7239 18.5 19.5 18.2761 19.5 18L20.5 18ZM8.64645 15.3536L3.64645 10.3536L4.35355 9.64645L9.35355 14.6464L8.64645 15.3536ZM3.64645 9.64645L8.64645 4.64645L9.35355 5.35355L4.35355 10.3536L3.64645 9.64645ZM4 9.5L14 9.5L14 10.5L4 10.5L4 9.5ZM20.5 16L20.5 18L19.5 18L19.5 16L20.5 16ZM14 9.5C17.5898 9.5 20.5 12.4101 20.5 16L19.5 16C19.5 12.9624 17.0376 10.5 14 10.5L14 9.5Z"
+                        fill="#222222"></path>
+                </g>
+            </svg>
         </div>
     </a>
+ </div>
     <!-- Sliding Menu -->
     <div class="slide-menu" id="menu">
         <div style="display: flex; justify-content: space-between;">
@@ -442,7 +459,7 @@
     </div>
 
     <!-- Product section -->
-    <section class="py-5" >
+    <section class="py-5"  style="margin-top: 10px;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <div class="col-md-6" style="display: flex;">
@@ -456,7 +473,8 @@
                     <img class="main-image" id="mainImage" src="{{product.image.url}}" alt="..." />
                 </div>
                 <div class="col-md-6" style="display: flex; flex-direction: column; align-items: center;">
-                    <div class="dots-container">
+                    <div class="dots-container"> 
+                        <span class="dot sideImage" style="width: 12px; height: 12px;"><img src="{{product.image.url}}" style="display: none;" alt=""></span>
                         {% for image in relatedImages %}
                         <span class="dot sideImage" style="width: 12px; height: 12px;" ><img src="{{image.image.url}}" style="display: none;" alt=""></span>
                        
@@ -467,8 +485,8 @@
                     <div class="fs-5 mb-5">
                         <span>Ghs{{product.price}}0</span>
                     </div>
-                    <div id="optionBox" class="dropdown">
-                        <div class="dropdown-selected" id="drop-down-select" onclick="toggleDropdown()">Select size</div>
+                    <div id="optionBox" class="dropdown" >
+                        <div class="dropdown-selected" id="drop-down-select" onclick="toggleDropdown()" >Select size</div>
                         <div class="dropdown-options" id="dropdownOptions">
                             <div class="size-box" id="size-3XL" onclick="selectSize('3XL')">3XL</div>
                             <div class="size-box" id="size-M" onclick="selectSize('M')">M</div>
@@ -478,18 +496,35 @@
                         </div>
                     </div>
 
-                        <div class="d-flex" id="addToCartm" style="margin: 15px;">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                        <div class="d-flex" id="addToCartm" style="margin: 15px; gap: 5px;">
+                        <div class="input-group" style="max-width: 8rem;">
+                            <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity()">-</button>
+                            <input class="form-control text-center" id="inputQuantity" type="text" value="1" min="1" readonly
+                                style="max-width: 3rem;" />
+                            <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity()">+</button>
+                        </div>
                             <button class="btn btn-outline-dark flex-shrink-0" type="button" id="addToCartDiv">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </button>
                         </div>
 
-                   <div id="infoBox">
-                    <div style="border-top: 0.2px solid black; display:flex; justify-content: space-between;"><span>Description</span><span>+</span></div>
-                    <div style="border-top: 0.2px solid black; display:flex; justify-content: space-between;"><span>Details</span><span>+</span></div>
-                    <div style="border-top: 0.2px solid black; border-bottom: 1px solid black;display:flex; justify-content: space-between;">Size Guide <span>+</span></div>
+                   <div id="infoBox" style="padding-top: 15px;">
+                    <div style="border-top: 0.2px solid #cccccc; display:flex; flex-direction: column; " class="contentBox">
+                        <div style="width: 100%; display: flex; justify-content: space-between;"><span>Description</span><span class="symbol">+</span></div>
+                        <div class="content" style="width: 100%; text-align: center;">Demo</div>
+                    </div>
+                    <div style="border-top: 0.2px solid #cccccc; display:flex; flex-direction: column; " class="contentBox">
+                        <div style="width: 100%; display: flex; justify-content: space-between;"><span>Details</span><span
+                                class="symbol">+</span></div>
+                        <div class="content" style="width: 100%; text-align: center;">Demo</div>
+                    </div>
+                    <div style="border-top: 0.2px solid #cccccc; display:flex; flex-direction: column; border-bottom: 0.2px solid #cccccc;" class="contentBox">
+                        <div style="width: 100%; display: flex; justify-content: space-between;"><span>Size Guide</span><span
+                                class="symbol">+</span></div>
+                        <div class="content" style="width: 100%; text-align: center;">Demo</div>
+                    </div>
+                    
 
                    </div>
 
@@ -574,6 +609,20 @@
     </div>
 </footer>
 <script>
+    // increase and decrease buttons
+    function increaseQuantity() {
+            var input = document.getElementById('inputQuantity');
+            input.value = parseInt(input.value) + 1; // Increase value by 1
+        }
+
+        function decreaseQuantity() {
+            var input = document.getElementById('inputQuantity');
+            if (input.value > 1) { // Prevent negative values
+                input.value = parseInt(input.value) - 1; // Decrease value by 1
+            }
+        }
+</script>
+<script>
     function toggleDropdown() {
             const options = document.getElementById("dropdownOptions");
             options.style.display = options.style.display === "block" ? "none" : "block";
@@ -588,7 +637,7 @@
             document.getElementById(`size-${size}`).classList.add('selected');
             document.getElementById("dropdownOptions").style.display = "none";
         }
-
+        selectSize('3XL')
         // Close the dropdown if clicked outside
         document.addEventListener('click', function (event) {
             const dropdown = document.getElementById("optionBox");
@@ -596,7 +645,19 @@
                 document.getElementById("dropdownOptions").style.display = "none";
             }
         });
-
+    contentBoxes = document.querySelectorAll('.contentBox')
+    contentBoxes.forEach((box)=>{
+        box.onclick = () =>{
+            box.querySelector('.content').classList.toggle('activeContentBox')
+        
+            if( box.querySelector('.symbol').innerText.trim() == '+' ){
+                box.querySelector('.symbol').innerText = '-'
+            } 
+            else{
+                box.querySelector('.symbol').innerText = '+'
+            }
+        }
+    })
 </script>
 <script>
     const menuBtn = document.getElementById('menu-btn');
