@@ -262,7 +262,7 @@
         margin: 2px;
         cursor: pointer;
         transition: color 0.3s, transform 0.3s;
-        flex: 1;
+      
     }
     #categoriesBox{
         max-width: 1200px;
@@ -426,13 +426,12 @@ flex-wrap: wrap;
         <div id="maincat" style="width: 100%; ">
             <div id="categoriesBox" style="display: flex; justify-content:right; padding-bottom: 18px; border-bottom: 1px solid #e3e6ea;  margin-left: auto; margin-right: auto;">
               
-                <div id="catBox" style="display: flex; justify-content: right;">
+                <div id="catBox" style="display: flex; justify-content: right;flex-wrap: wrap; ">
                     <span id="all" class="activeMenu" style="padding: 10px; border: 1px solid #e3e6ea; border-radius: 15px;">All</span>
                     <span id="hoodies" style="padding: 10px; border: 1px solid #e3e6ea; border-radius: 15px;">Hoodies</span>
                     <span id="tees" style="padding: 10px; border: 1px solid #e3e6ea; border-radius:15px;">Tees</span>
                     <span id="shorts" style="padding: 10px; border: 1px solid #e3e6ea; border-radius:15px;">Shorts</span>
-                    <span id="joggers" style="padding: 10px; border: 1px solid #e3e6ea; border-radius:15px;">Joggers</span>
-                
+                    <span id="joggers" style="padding: 10px; border: 1px solid #e3e6ea; border-radius:15px;" style="width: fit-content;">Joggers</span>      
                 </div>
             </div>
         </div>
