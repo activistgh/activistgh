@@ -466,7 +466,7 @@
         <div id="cartBox">
             
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center;margin-left: 20px;" id="total-price-div">
+        <div style="display: flex; justify-content: space-between; align-items: center;margin-left: 20px;" id="total-price-div" >
             <div>Total:</div>
             <div class="total-price" id="total-price" style="color: #28a745; font-weight: bold; margin-right: 20px;"> 0.00</div>
         </div>
@@ -773,7 +773,7 @@
                 Checkout
             </button></a>
         </div>`;
-            checkoutBox.innerHTML += checkoutButton;  // Append the checkout button
+            checkoutBox.innerHTML = checkoutButton;  // Append the checkout button
                     // Update total price
             totalPriceElement.textContent = formatPrice(totalPrice);
         }
