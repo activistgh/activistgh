@@ -110,12 +110,17 @@
             color: #555;
         }
 
-
+        #down-arrow{
+            display: none;
+        }
 
         /* Media query for responsive design */
         @media (max-width: 768px) {
             .checkout-container {
                 flex-direction: column;
+            }
+            #down-arrow{
+                display: block;
             }
             .slide-cart,.slide-menu{
                 width: 100%;
@@ -178,6 +183,27 @@
         }
 
 
+.slide-menu ul {
+list-style-type: none;
+padding: 0;
+}
+
+.slide-menu ul li {
+margin: 20px 0;
+text-align: center;
+}
+
+.slide-menu ul li a {
+color: black;
+text-decoration: none;
+
+transition: color 0.2s ease;
+line-height: 1rem;
+}
+
+
+
+
         /* Header styles */
         header {
             display: flex;
@@ -237,7 +263,7 @@
         <div class="header-logo" style="margin: 0 auto;">
             <img src="{% static 'logo.svg' %}" alt="Footer Logo">
         </div>
-        <div class="cart-button">
+        <div class="cart-button" style="visibility: hidden;">
             <svg width="30px" height="30px"  viewBox="0 0 24.00 24.00" fill="none" id="cart-btn" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -272,17 +298,19 @@
         </div>
     </a>
 </div>
-    <!-- Sliding Menu -->
-    <div class="slide-menu" id="menu">
+<!-- Sliding Menu -->
+<div class="slide-menu" id="menu">
+    <div style="display: flex; justify-content: space-between;">
         <span class="close-btn" id="close-menu">&times;</span>
-        <h2>Menu</h2>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+        <div style="padding-left: 6.5px; font-size: 20px; padding-top: 12.5px;">Menu</div>
     </div>
+    <hr>
+    <ul>
+        <li><a href="{% url 'homePage' %}">Home</a></li>
+        <li><a href="{% url 'shop' %}">Shop</a></li>
+        <li><a href="{% url 'gallery' %}">Gallery</a></li>
+    </ul>
+</div>
 
     <!-- Sliding Cart -->
     <div class="slide-cart" id="cart">
@@ -297,11 +325,11 @@
     <div class="checkout-container">
         <!-- Right Side: Cart items -->
         <div class="cart-items">
-            <h2>Your Cart</h2>
+            <div style="display:flex; justify-content: space-between;align-items: center; margin-bottom: 10px;"><h2 style="margin-top: auto; margin-bottom: auto;">Your Cart</h2><img src="{% static 'down.svg' %}" id="down-arrow"  alt="down"></div>
             <div id="cart-items-container">
                 <!-- Cart items will be injected here by JavaScript -->
             </div>
-            <div style="display: flex; justify-content: space-between; align-items: center;margin-left: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;margin-left: 20px;" id="total-price-div">
                 <div>Total:</div>
                 <div class="total-price" id="total-price" style="color: #28a745; font-weight: bold;"> 0.00</div>
             </div>
@@ -330,7 +358,7 @@
                 </div>
 
                 <div class="form-floating">
-                    <textarea class="form-control" placeholder="Any Specific delivery instructions."
+                    <textarea class="form-control" placeholder="Any Specific delivery instructions." style="height: 140px;"
                         id="floatingTextarea"></textarea>
                     <label for="floatingTextarea">Order Notes (optional)</label>
                 </div>
@@ -355,6 +383,24 @@
     </div>
     <div class="alert alert-info" style="display: none;"></div>
 </body>
+<script>
+    down_arrow = document.getElementById('down-arrow')
+    cart_div = document.getElementById('cart-items-container')
+    total_price_div = document.getElementById('total-price-div')
+    down_arrow.onclick = () => {
+        if (down_arrow.src.includes('down')){
+            down_arrow.src = '{% static "up.svg" %}'
+            cart_div.style.display = 'none'
+            total_price_div.style.display = 'none'
+
+        }
+        else if (down_arrow.src.includes('up')){
+            down_arrow.src = '{% static "down.svg" %}'
+            cart_div.style.display = 'block'
+            total_price_div.style.display = 'flex'
+        }
+    }
+</script>
 <script>
 
     function displayCartItems() {

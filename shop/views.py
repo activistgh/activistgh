@@ -3,7 +3,7 @@ from .models import Product, RelatedImages
 # Create your views here.
 
 def shop(request):
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('id')
     context ={
         'products':products,
     }
