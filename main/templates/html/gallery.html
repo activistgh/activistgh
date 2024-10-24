@@ -191,8 +191,7 @@
 
 }
 
-
-    </style>
+</style>
 </head>
 
 <body>
@@ -206,9 +205,11 @@
             <div></div>
         </div>
     
-        <div class="header-logo" style="margin: 0 auto;">
-            <img src="{% static 'logo.svg' %}" alt="Footer Logo">
-        </div>
+            <a href="{% url 'homePage' %}">
+                <div class="header-logo">
+                    <img src="{% static 'logo.svg' %}" alt="Footer Logo">
+                </div>
+            </a>
         <div class="cart-button" id="cart-btn" style="margin-right: 30px; visibility: hidden;">
             <svg width="30px" height="30px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -225,7 +226,7 @@
                         stroke="#000000" stroke-width="0.672"></path>
                 </g>
             </svg>
-    
+            
         </div>
     </header>
 

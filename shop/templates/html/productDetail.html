@@ -54,14 +54,26 @@
    
 
         .dot {
-            height: 10px;
-            width: 10px;
-            margin: 0 5px;
-            background-color: #bbb; /* Inactive dot color */
-            border-radius: 50%;
+            height: 30px;
+            width: 30px;
+            /* Inactive dot color */
+           
             display: inline-block;
             cursor: pointer;
-            transition: background-color 0.3s;
+           margin: 10px;
+           
+           
+            
+        }
+        .dot img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border:1px solid #cccccc;
+           
+            border-radius: 10px;
+        
+           
         }
 
         .dot.active {
@@ -405,9 +417,11 @@
             <div></div>
         </div>
 
-        <div class="header-logo" style="margin: 0 auto;">
-            <img src="{% static 'logo.svg' %}" alt="Footer Logo">
-        </div>
+        <a href="{% url 'homePage' %}">
+            <div class="header-logo">
+                <img src="{% static 'logo.svg' %}" alt="Footer Logo">
+            </div>
+        </a>
         <div class="cart-button" id="cart-btn">
         <svg width="30px" height="30px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -424,6 +438,7 @@
                     stroke="#000000" stroke-width="0.672"></path>
             </g>
         </svg>
+        <span id="cart-total"></span>
 
         </div>
     </header>
@@ -463,15 +478,8 @@
         <span class="close-btn" id="close-cart">&times;</span>
         <div id="bag-header" style="padding: 6.5px; font-size: 20px;">CART</div>
         <hr>
-        <div id="cartBox">
+        <div id="cartBox" style="overflow-y: auto; max-height: 90vh; ">
             
-        </div>
-        <div style="display: flex; justify-content: space-between; align-items: center;margin-left: 20px;" id="total-price-div" >
-            <div>Total:</div>
-            <div class="total-price" id="total-price" style="color: #28a745; font-weight: bold; margin-right: 20px;"> 0.00</div>
-        </div>
-        <div id="checkoutBox">
-
         </div>
     </div>
 
@@ -491,13 +499,13 @@
                 </div>
                 <div class="col-md-6" style="display: flex; flex-direction: column; align-items: center;">
                     <div class="dots-container"> 
-                        <span class="dot sideImage" style="width: 12px; height: 12px;"><img src="{{product.image.url}}" style="display: none;" alt=""></span>
+                        <span class="dot sideImage" ><img src="{{product.image.url}}" alt=""></span>
                         {% for image in relatedImages %}
-                        <span class="dot sideImage" style="width: 12px; height: 12px;" ><img src="{{image.image.url}}" style="display: none;" alt=""></span>
+                        <span class="dot sideImage"  ><img src="{{image.image.url}}"  alt=""></span>
                        
                         {% endfor %}
                     </div>
-                    <div class="small mb-1">SKU: BST-498</div>
+                   
                     <h1 class="display-5 fw-bolder">{{product.name}}</h1>
                     <div class="fs-5 mb-5">
                         <span>Ghs{{product.price}}0</span>
@@ -529,17 +537,27 @@
                    <div id="infoBox" style="padding-top: 15px;">
                     <div style="border-top: 0.2px solid #cccccc; display:flex; flex-direction: column; " class="contentBox">
                         <div style="width: 100%; display: flex; justify-content: space-between;"><span>Description</span><span class="symbol">+</span></div>
-                        <div class="content" style="width: 100%; text-align: center;">Demo</div>
+                        <div class="content" style="width: 100%; text-align: center;">{{product.name}}</div>
                     </div>
                     <div style="border-top: 0.2px solid #cccccc; display:flex; flex-direction: column; " class="contentBox">
                         <div style="width: 100%; display: flex; justify-content: space-between;"><span>Details</span><span
                                 class="symbol">+</span></div>
-                        <div class="content" style="width: 100%; text-align: center;">Demo</div>
+                        <div class="content" style="width: 100%; text-align: center;">{{product.name}}</div>
                     </div>
                     <div style="border-top: 0.2px solid #cccccc; display:flex; flex-direction: column; border-bottom: 0.2px solid #cccccc;" class="contentBox">
                         <div style="width: 100%; display: flex; justify-content: space-between;"><span>Size Guide</span><span
                                 class="symbol">+</span></div>
-                        <div class="content" style="width: 100%; text-align: center;">Demo</div>
+                        <div class="content" style="width: 100%; text-align: center;">
+                            
+                            <p><strong>3XL</strong>: Chest 52-54", Waist 46-48", Hips 54-56"</p>
+                            <p><strong>M</strong>: Chest 38-40", Waist 32-34", Hips 39-41"</p>
+                            <p><strong>L</strong>: Chest 42-44", Waist 36-38", Hips 43-45"</p>
+                            <p><strong>XL</strong>: Chest 46-48", Waist 40-42", Hips 47-49"</p>
+                            <p><strong>2XL</strong>: Chest 50-52", Waist 44-46", Hips 51-53"</p>
+                            
+                            <p><strong>How to Measure:</strong> Measure around the chest, waist, and hips at their fullest points.</p>
+                            
+                        </div>
                     </div>
                     
 
@@ -713,11 +731,13 @@
     cartBtn.addEventListener('click', () => {
         cart.classList.add('active');
         showOverlay();
+        document.body.style.overflow = 'hidden'
     });
 
     closeCartBtn.addEventListener('click', () => {
         cart.classList.remove('active');
         hideOverlay();
+        document.body.style.overflow = 'scroll'
     });
 
 
@@ -727,6 +747,7 @@
         menu.classList.remove('active');
         cart.classList.remove('active');
         hideOverlay();
+        document.body.style.overflow = 'scroll'
     });
 </script>
 
@@ -740,10 +761,12 @@
         let cartBox = document.getElementById('cartBox');  // Div to display cart items
         cartBox.innerHTML = '';  // Clear existing content
         checkoutBox = document.getElementById('checkoutBox')
-        const totalPriceElement = document.getElementById('total-price');
         let totalPrice = 0;
 
+        
+       
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
+         document.getElementById('cart-total').innerText = cart.length
         if (cart.length > 0) {
             cart.forEach(item => {
                 // Create HTML for each cart item
@@ -767,18 +790,22 @@
                 cartBox.innerHTML += cartItemDiv;  // Add the cart item to the cart box
                 totalPrice += item.price
             });
-            const checkoutButton = `
+            cartBox.innerHTML += `
+        <div style="display: flex; justify-content: space-between; align-items: center;margin-left: 20px;" id="total-price-div" >
+            <div>Total:</div>
+            <div class="total-price" id="total-price" style="color: #28a745; font-weight: bold; margin-right: 20px;">${formatPrice(totalPrice) }</div>
+        </div>
         <div style="text-align: center; margin: 20px;">
                 <a href="{% url 'checkout' %}">       <button style="padding: 10px 20px; width:100%; background-color: #228B22; color: white; border: none; border-radius: 5px; cursor: pointer;">
                 Checkout
             </button></a>
-        </div>`;
-            checkoutBox.innerHTML = checkoutButton;  // Append the checkout button
-                    // Update total price
-            totalPriceElement.textContent = formatPrice(totalPrice);
+        </div>
+        `;
+            
         }
         else {
             cartBox.innerHTML = '<div class="empty-cart">Nothing in Cart</div>'
+          
 
         }
     }
@@ -804,33 +831,68 @@
     // Load and display cart items when the page loads
     window.onload = displayCartItems;
     
-        addToCartDiv = document.getElementById('addToCartDiv')
-        product_id = '{{product.unique_id}}'
-        image_url = '{{product.image.url}}'
-        product_name = '{{product.name}}'
-        addToCartDiv.onclick = () => {
-            product_id_date = `${Date.now()}_${Math.floor(Math.random() * 1000)}`
-            quantity = document.getElementById('inputQuantity').value
-            let selectedBox = document.querySelector('.size-box.selected');
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            price = Number(quantity * {{ product.price }});
+   // Getting the addToCartDiv element
+    const addToCartDiv = document.getElementById('addToCartDiv');
 
-        // Store the selected size value
-        let selectedSize = selectedBox ? selectedBox.innerText : null;
+    // Product details using template literals
+    const product_id = '{{product.unique_id}}';
+    const image_url = '{{product.image.url}}';
+    const product_name = '{{product.name}}';
 
-        if (selectedSize) {
-            // none
-        } else {
-            return alert('no size');
+    // Event listener for the addToCartDiv click event
+    addToCartDiv.onclick = () => {
+        // Create a unique product ID with timestamp and random number
+        const product_id_date = `${product_id}_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+
+        // Get quantity from the input field
+        const quantity = document.getElementById('inputQuantity').value;
+
+        // Select the currently selected size
+        const selectedBox = document.querySelector('.size-box.selected');
+        const selectedSize = selectedBox ? selectedBox.innerText : null;
+
+        // If no size is selected, alert the user and exit
+        if (!selectedSize) {
+            return alert('No size selected');
         }
 
-        item = { product_id_date, product_name, quantity, image_url, selectedSize, price }
-        cart.push(item);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        displayCartItems()
-        alert('done')
-    
+        // Calculate the total price
+        const price = Number(quantity) * {{ product.price }};
+
+    // Create the new item object to add or update in the cart
+    const newItem = {
+        product_id_date,
+        product_id,  // Include original product_id to identify the product in the cart
+        product_name,
+        quantity,
+        image_url,
+        selectedSize,
+        price
+    };
+
+    // Get the cart from localStorage or initialize an empty array
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Find index of the existing product in the cart by both product_id and selectedSize
+    const existingIndex = cart.findIndex(item => item.product_id === product_id && item.selectedSize === selectedSize);
+
+    if (existingIndex !== -1) {
+        // If the same product with the same size exists, replace it with the new item
+        cart[existingIndex] = newItem;
+        alert('Updated product in cart');
+    } else {
+        // If the product or size is new, add it to the cart
+        cart.push(newItem);
+        alert('Item added to cart');
     }
+
+    // Save the updated cart back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Call a function to display the updated cart items
+    displayCartItems();
+};
+
 
 
 </script>

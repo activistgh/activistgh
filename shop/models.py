@@ -7,7 +7,8 @@ class Product(models.Model):
     unique_id = models.UUIDField(default=uuid.uuid4,editable=False,unique=True)
     name = models.CharField(max_length=255)
     price = models.FloatField()
-    description = models.TextField(null=True,blank=True)
+    description = models.TextField(blank=True,default=name)
+    details = models.TextField(blank=True,default=name)
     image = models.ImageField(upload_to='productImages/')
     tag = models.CharField(max_length=255,null=True,blank=True)
 
