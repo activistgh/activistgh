@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 import json
 from pathlib import Path
 from google.oauth2 import service_account 
@@ -42,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'shop',
+    'crispy_forms',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +140,8 @@ USE_TZ = True
 
 
 
+
+
 #Google Cloud Storage settings
 GS_PROJECT_ID = 'precise-line-437900-m9'
 GS_BUCKET_NAME = 'activistimages'
@@ -170,3 +177,10 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Get public and secret key from env
+
+PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY')
+
+PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY')

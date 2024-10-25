@@ -22,56 +22,7 @@
 
         }
 
-        /* Container for checkout */
-        .checkout-container {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 0 auto;
-            max-width: 1200px;
-            padding: 20px;
-        }
-
-        /* Left column for form */
-        .checkout-form {
-            flex: 1;
-            min-width: 300px;
-            padding: 20px;
-            background-color: #fff;
-
-            margin-right: 20px;
-        }
-
-        /* Right column for cart items */
-        .cart-items {
-            flex: 1;
-            min-width: 300px;
-            padding: 20px;
-            background-color: #fff;
-
-        }
-
-        /* Form styling */
-        .checkout-form h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        .checkout-form .form-floating {
-            margin-bottom: 15px;
-        }
-
-
-
-        .checkout-form .form-floating input,
-        .checkout-form .form-floating select,
-        .checkout-form .form-floating textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
+      
         /* Cart items styling */
         .cart-items h2 {
             margin-bottom: 20px;
@@ -111,16 +62,18 @@
             color: #555;
         }
 
- 
+
         /* Media query for responsive design */
         @media (max-width: 768px) {
             .checkout-container {
                 flex-direction: column;
             }
-           
-            .slide-cart,.slide-menu{
+
+            .slide-cart,
+            .slide-menu {
                 width: 100%;
             }
+
             .checkout-form,
             .cart-items {
                 margin-right: 0;
@@ -179,23 +132,23 @@
         }
 
 
-.slide-menu ul {
-list-style-type: none;
-padding: 0;
-}
+        .slide-menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-.slide-menu ul li {
-margin: 20px 0;
-text-align: center;
-}
+        .slide-menu ul li {
+            margin: 20px 0;
+            text-align: center;
+        }
 
-.slide-menu ul li a {
-color: black;
-text-decoration: none;
+        .slide-menu ul li a {
+            color: black;
+            text-decoration: none;
 
-transition: color 0.2s ease;
-line-height: 1rem;
-}
+            transition: color 0.2s ease;
+            line-height: 1rem;
+        }
 
 
 
@@ -239,7 +192,8 @@ line-height: 1rem;
             margin: 6px 0;
             transition: 0.4s;
         }
-          #logo-footer{
+
+        #logo-footer {
             max-width: 20%;
             width: 33%;
         }
@@ -260,13 +214,14 @@ line-height: 1rem;
             <div></div>
         </div>
 
-            <a href="{% url 'homePage' %}">
-                <div class="header-logo">
-                    <img src="{% static 'logo.svg' %}" alt="Footer Logo">
-                </div>
-            </a>
+        <a href="{% url 'homePage' %}">
+            <div class="header-logo">
+                <img src="{% static 'logo.svg' %}" alt="Footer Logo">
+            </div>
+        </a>
         <div class="cart-button" style="visibility: hidden;">
-            <svg width="30px" height="30px"  viewBox="0 0 24.00 24.00" fill="none" id="cart-btn" xmlns="http://www.w3.org/2000/svg">
+            <svg width="30px" height="30px" viewBox="0 0 24.00 24.00" fill="none" id="cart-btn"
+                xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -284,35 +239,35 @@ line-height: 1rem;
 
         </div>
     </header>
-<div style="padding-top: 5px;">
-    <a href="{% url 'shop' %}" >
-        <div style="padding-left: 17px; margin-bottom: 10px;">
-            <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                stroke="#000000" stroke-width="0.00024000000000000003">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                    <path
-                        d="M4 10L3.64645 10.3536L3.29289 10L3.64645 9.64645L4 10ZM20.5 18C20.5 18.2761 20.2761 18.5 20 18.5C19.7239 18.5 19.5 18.2761 19.5 18L20.5 18ZM8.64645 15.3536L3.64645 10.3536L4.35355 9.64645L9.35355 14.6464L8.64645 15.3536ZM3.64645 9.64645L8.64645 4.64645L9.35355 5.35355L4.35355 10.3536L3.64645 9.64645ZM4 9.5L14 9.5L14 10.5L4 10.5L4 9.5ZM20.5 16L20.5 18L19.5 18L19.5 16L20.5 16ZM14 9.5C17.5898 9.5 20.5 12.4101 20.5 16L19.5 16C19.5 12.9624 17.0376 10.5 14 10.5L14 9.5Z"
-                        fill="#222222"></path>
-                </g>
-            </svg>
-        </div>
-    </a>
-</div>
-<!-- Sliding Menu -->
-<div class="slide-menu" id="menu">
-    <div style="display: flex; justify-content: space-between;">
-        <span class="close-btn" id="close-menu">&times;</span>
-        <div style="padding-left: 6.5px; font-size: 20px; padding-top: 12.5px;">Menu</div>
+    <div style="padding-top: 5px;">
+        <a href="{% url 'shop' %}">
+            <div style="padding-left: 17px; margin-bottom: 10px;">
+                <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    stroke="#000000" stroke-width="0.00024000000000000003">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M4 10L3.64645 10.3536L3.29289 10L3.64645 9.64645L4 10ZM20.5 18C20.5 18.2761 20.2761 18.5 20 18.5C19.7239 18.5 19.5 18.2761 19.5 18L20.5 18ZM8.64645 15.3536L3.64645 10.3536L4.35355 9.64645L9.35355 14.6464L8.64645 15.3536ZM3.64645 9.64645L8.64645 4.64645L9.35355 5.35355L4.35355 10.3536L3.64645 9.64645ZM4 9.5L14 9.5L14 10.5L4 10.5L4 9.5ZM20.5 16L20.5 18L19.5 18L19.5 16L20.5 16ZM14 9.5C17.5898 9.5 20.5 12.4101 20.5 16L19.5 16C19.5 12.9624 17.0376 10.5 14 10.5L14 9.5Z"
+                            fill="#222222"></path>
+                    </g>
+                </svg>
+            </div>
+        </a>
     </div>
-    <hr>
-    <ul>
-        <li><a href="{% url 'homePage' %}">Home</a></li>
-        <li><a href="{% url 'shop' %}">Shop</a></li>
-        <li><a href="{% url 'gallery' %}">Gallery</a></li>
-    </ul>
-</div>
+    <!-- Sliding Menu -->
+    <div class="slide-menu" id="menu">
+        <div style="display: flex; justify-content: space-between;">
+            <span class="close-btn" id="close-menu">&times;</span>
+            <div style="padding-left: 6.5px; font-size: 20px; padding-top: 12.5px;">Menu</div>
+        </div>
+        <hr>
+        <ul>
+            <li><a href="{% url 'homePage' %}">Home</a></li>
+            <li><a href="{% url 'shop' %}">Shop</a></li>
+            <li><a href="{% url 'gallery' %}">Gallery</a></li>
+        </ul>
+    </div>
 
     <!-- Sliding Cart -->
     <div class="slide-cart" id="cart">
@@ -324,142 +279,90 @@ line-height: 1rem;
         </div>
     </div>
 
-    <div class="checkout-container">
-        <!-- Right Side: Cart items -->
-        <div class="cart-items">
-            <div style="display:flex; justify-content: space-between;align-items: center; margin-bottom: 10px;"><h2 style="margin-top: auto; margin-bottom: auto;">Your Cart</h2><img src="{% static 'down.svg' %}" id="down-arrow"  alt="down"></div>
-            <div id="cart-items-container">
-                <!-- Cart items will be injected here by JavaScript -->
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center;margin-left: 20px;" id="total-price-div">
-                <div>Total:</div>
-                <div class="total-price" id="total-price" style="color: #28a745; font-weight: bold;"> 0.00</div>
-            </div>
-        </div>
-        <!-- Left Side: Form for customer details -->
-        <div class="checkout-form">
-            <h2>Personal Details</h2>
-
-            <form id="checkout-form" method="POST" action="">
-                {% csrf_token %}
-                <div style="display: flex; justify-content: center; gap: 10px;">
-                    <div class="form-floating" style="width: 50%;">
-                        <input type="text" class="form-control" id="fname" placeholder="fist name" name="fname">
-                        <label for="fname">First name</label>
-                    </div>
-                    <div class="form-floating" style="width: 50%;">
-                        <input type="text" class="form-control" id="lname" placeholder="last name" name="lname">
-                        <label for="lname">Last name</label>
-                    </div>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
-                    <label for="floatingInput">Email address</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input id="phone" type="tel" name="phone" style="min-width: 100%;" />
-                </div>
-
-                <div class="form-floating">
-                    <textarea class="form-control" placeholder="Any Specific delivery instructions." style="height: 140px;"
-                        id="floatingTextarea" name="orderNotes"></textarea>
-                    <label for="floatingTextarea">Order Notes (optional)</label>
-                </div>
-                <h2>Delivery Details</h2>
-                <div class="form-floating mb-3">
-                    <input type="Address" class="form-control" id="deliveryAddress" placeholder="Delivery Address" name="deliveryAddress">
-                    <label for="deliveryAddress">Delivery address</label>
-                </div>
-                <div class="form-floating">
-                    <textarea class="form-control" style="height: 140px;"
-                        placeholder="Any Specific delivery instructions." id="deliveryInfo" name="deliveryInfo"></textarea>
-
-                    <label>Additional Delivery Information</label>
-                </div>
-                <div>
-                    <input type="number" name="cart-total" id="cart-total-sub" hidden>
-                </div>
-
-                <button type="submit" name="pay"
-                    style="width:100%;padding:10px;border:none;background-color:#28a745;color:white;font-size:18px;border-radius:5px;">Proceed
-                    to pay</button>
-            </form>
-        </div>
-
-      
-    </div>
     <div class="alert alert-info" style="display: none;"></div>
-<footer style="text-align: center; padding: 20px; background-color: #000;">
-    <!-- Centering the logo -->
-    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo" style="max-width: 150px;">
+<div style="display: flex; justify-content: center; padding-top: 10%; padding-bottom: 10%;">
+    <div
+        style="display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px;  border: 1px solid #ddd; background-color: #f9f9f9; margin-top: 20px; margin-bottom: 20px; width: 300px;">
+        <h1 style="font-size: 24px; color: #333; margin-bottom: 10px;">Make Payment</h1>
+        <p style="font-size: 18px; color: #555; margin-bottom: 20px;">for GHS{{payment.amount}}</p>
+        <button id="django-paystack-button" onclick="payWithPayStack()"
+            style="padding: 10px 20px; font-size: 16px; color: #fff; background-color: #4CAF50; border: none; border-radius: 5px; cursor: pointer;">Make
+            payment</button>
     </div>
+</div>
+ 
+      
+    <footer style="text-align: center; padding: 20px; background-color: #000;">
+        <!-- Centering the logo -->
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+            <img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo" style="max-width: 150px;">
+        </div>
 
-    <!-- Social media icons -->
-    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <!-- Instagram Icon -->
-        <span style="margin-right: 25px;">
-            <svg width="50px" height="50px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z"
-                    stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z"
-                    stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                <rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)" fill="#ffffff"></rect>
-                <rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)" stroke="#ffffff"
-                    stroke-linecap="round"></rect>
-            </svg>
-        </span>
+        <!-- Social media icons -->
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+            <!-- Instagram Icon -->
+            <span style="margin-right: 25px;">
+                <svg width="50px" height="50px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z"
+                        stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z"
+                        stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)" fill="#ffffff">
+                    </rect>
+                    <rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)" stroke="#ffffff"
+                        stroke-linecap="round"></rect>
+                </svg>
+            </span>
 
-        <!-- Facebook Icon -->
-        <span style="margin-right: 30px; margin-top: 7px;">
-            <svg fill="#ffffff" width="35px" height="35px" viewBox="0 0 32 32" version="1.1"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M30.996 16.091c-0.001-8.281-6.714-14.994-14.996-14.994s-14.996 6.714-14.996 14.996c0 7.455 5.44 13.639 12.566 14.8l0.086 0.012v-10.478h-3.808v-4.336h3.808v-3.302c-0.019-0.167-0.029-0.361-0.029-0.557 0-2.923 2.37-5.293 5.293-5.293 0.141 0 0.281 0.006 0.42 0.016l-0.018-0.001c1.199 0.017 2.359 0.123 3.491 0.312l-0.134-0.019v3.69h-1.892c-0.086-0.012-0.185-0.019-0.285-0.019-1.197 0-2.168 0.97-2.168 2.168 0 0.068 0.003 0.135 0.009 0.202l-0.001-0.009v2.812h4.159l-0.665 4.336h-3.494v10.478c7.213-1.174 12.653-7.359 12.654-14.814v-0z">
-                </path>
-            </svg>
-        </span>
+            <!-- Facebook Icon -->
+            <span style="margin-right: 30px; margin-top: 7px;">
+                <svg fill="#ffffff" width="35px" height="35px" viewBox="0 0 32 32" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M30.996 16.091c-0.001-8.281-6.714-14.994-14.996-14.994s-14.996 6.714-14.996 14.996c0 7.455 5.44 13.639 12.566 14.8l0.086 0.012v-10.478h-3.808v-4.336h3.808v-3.302c-0.019-0.167-0.029-0.361-0.029-0.557 0-2.923 2.37-5.293 5.293-5.293 0.141 0 0.281 0.006 0.42 0.016l-0.018-0.001c1.199 0.017 2.359 0.123 3.491 0.312l-0.134-0.019v3.69h-1.892c-0.086-0.012-0.185-0.019-0.285-0.019-1.197 0-2.168 0.97-2.168 2.168 0 0.068 0.003 0.135 0.009 0.202l-0.001-0.009v2.812h4.159l-0.665 4.336h-3.494v10.478c7.213-1.174 12.653-7.359 12.654-14.814v-0z">
+                    </path>
+                </svg>
+            </span>
 
-        <!-- X (Twitter) Icon -->
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="30px" height="30px" style="margin-top: 9px;"
-                viewBox="0 0 150 150" version="1.1">
-                <path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;"
-                    d="M 89.285156 63.574219 L 145.136719 0 L 131.90625 0 L 83.390625 55.191406 L 44.671875 0 L 0 0 L 58.566406 83.464844 L 0 150.125 L 13.230469 150.125 L 64.429688 91.828125 L 105.328125 150.125 L 150 150.125 M 18.003906 9.769531 L 38.328125 9.769531 L 131.894531 140.835938 L 111.566406 140.835938 ">
-                </path>
-            </svg>
-        </span>
-    </div>
+            <!-- X (Twitter) Icon -->
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="30px" height="30px"
+                    style="margin-top: 9px;" viewBox="0 0 150 150" version="1.1">
+                    <path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;"
+                        d="M 89.285156 63.574219 L 145.136719 0 L 131.90625 0 L 83.390625 55.191406 L 44.671875 0 L 0 0 L 58.566406 83.464844 L 0 150.125 L 13.230469 150.125 L 64.429688 91.828125 L 105.328125 150.125 L 150 150.125 M 18.003906 9.769531 L 38.328125 9.769531 L 131.894531 140.835938 L 111.566406 140.835938 ">
+                    </path>
+                </svg>
+            </span>
+        </div>
 
-    <!-- Footer Links -->
-    <div style="margin-bottom: 20px;">
-        <div>Cause A Change</div>
-        <div>Gallery</div>
-    </div>
+        <!-- Footer Links -->
+        <div style="margin-bottom: 20px;">
+            <div>Cause A Change</div>
+            <div>Gallery</div>
+        </div>
 
-    <!-- Footer Copyright -->
-    <div>
-        <p class="copyright">&copy; 2024 ACTIVIST</p>
-    </div>
-</footer>
+        <!-- Footer Copyright -->
+        <div>
+            <p class="copyright">&copy; 2024 ACTIVIST</p>
+        </div>
+    </footer>
+
 </body>
-<script>
 
-</script>
 <script>
     down_arrow = document.getElementById('down-arrow')
     cart_div = document.getElementById('cart-items-container')
     total_price_div = document.getElementById('total-price-div')
     down_arrow.onclick = () => {
-        if (down_arrow.src.includes('down')){
+        if (down_arrow.src.includes('down')) {
             down_arrow.src = '{% static "up.svg" %}'
             cart_div.style.display = 'none'
             total_price_div.style.display = 'none'
 
         }
-        else if (down_arrow.src.includes('up')){
+        else if (down_arrow.src.includes('up')) {
             down_arrow.src = '{% static "down.svg" %}'
             cart_div.style.display = 'block'
             total_price_div.style.display = 'flex'
@@ -623,11 +526,62 @@ line-height: 1rem;
         // Update total price
         totalPriceElement.textContent = formatPrice(totalPrice);
         document.getElementById('cart-total-sub').value = totalPrice
-        
+
     }
 
     // Initialize the cart items on page load
     window.onload = renderCartItems;
+</script>
+<script src="https://js.paystack.co/v2/inline.js"></script>
+<script>
+    // function payWithPayStack(){
+    //     let currency = 'GHS';
+    //     let plan = "";
+    //     let ref = "{{payment.ref}}"
+    //     let obj = {
+    //         key: "{{paystack_public_key}}",
+    //         email: "{{payment.email}}",
+    //         amount: "{{payment.amount}}",
+    //         ref: ref,
+    //         callback: function(response){
+    //             window.location.href = "{url 'verify-payment' payment.ref }"
+    //         }
+    //     }
+    //     if (Boolean(currency)){
+    //         obj.currency = currency.toUpperCase()
+    //     }
+    //     if (Boolean(plan)){
+    //         obj.plan = plan;
+
+    //     }
+    //     var handler = PaystackPop.setup(obj)
+    //     handler.openIframe();
+    // }
+
+    function payWithPayStack() {
+        const paystack = new PaystackPop();
+
+        paystack.newTransaction({
+
+            key: "pk_live_946307e93a1f4a69a9f9d0aa2d5846b12e2aba6c",
+            email: "{{payment.email}}",
+            amount: "{{payment.amount_value}}",
+
+            onSuccess: (transaction) => {
+
+               alert('successfully Paid')
+
+            },
+
+            onCancel: () => {
+
+                alert('payment Canceled')
+
+            }
+
+        });
+    }
+
 </script>
 <script>
     const phoneInputField = document.querySelector("#phone");
