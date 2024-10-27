@@ -312,7 +312,7 @@
         <div><b>Order Id: </b>{{payment.order_id}}</div>
             <div >
                 {% if request.user.is_authenticated %}
-                <form action="" method="POST" style="display: flex; flex-direction: row;">
+                <form action="" method="POST" style="display: flex; flex-direction: row;align-items: center;">
                     {% csrf_token %}
                     {{DeliveryStatusUpdateFormCreator}}
                     <input type="submit" name="updateDeliveryStatus" style="margin-left: 5px;" value="Update">
