@@ -308,7 +308,7 @@
             <li><a href="{% url 'gallery' %}">Gallery</a></li>
         </ul>
     </div>
-    <div style="display: flex; justify-content: center; margin-top: 100px; gap: 10px;" >
+    <div style="display: flex; justify-content: center; margin-top: 100px; gap: 10px; align-items: center;" >
         <div><b>Order Id: </b>{{payment.order_id}}</div>
             <div >
                 {% if request.user.is_authenticated %}
@@ -333,7 +333,7 @@
                 {% for item in payment.cart.cart_objects.all %}
                 <div style="display: flex; justify-content: space-between;">
                                     <div style="display: flex;">
-                                        <img src="{{item.product.image.url}}" alt="{{item.product_name}}" style="width: 100px; height:100px" />
+                                        <img src="{{item.product.image.url}}" alt="{{item.product_name}}" style="width: 100px; height:100px; border-radius:10px;"/>
                                         <div class="cart-item-details">
                                             <div class="cart-item-name">{{item.product.name}}x{{item.quantity}}</div>
                                             <div class="cart-item-size">{{item.size}}</div>
