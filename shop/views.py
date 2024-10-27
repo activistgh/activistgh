@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Product, RelatedImages
+from .forms import DeliveryStatusUpdateForm
 from payment.models import Payment
 from django.conf import settings 
 from .models import Cart, CartObject
@@ -91,8 +92,22 @@ def orderSuccess(request,ref):
 
 def orderDetails(request,ref):
     payment = Payment.objects.get(ref=ref)
-    
+    DeliveryStatusUpdateFormCreator = DeliveryStatusUpdateForm(instance=payment)
+
+    if request.method == 'POST':
+        if 'updateDeliveryStatus' in request.POST:
+            DeliveryStatusUpdateFormCreator = DeliveryStatusUpdateForm(request.POST, instance=payment)
+            if DeliveryStatusUpdateFormCreator.is_valid():
+                DeliveryStatusUpdateFormCreator.save()
+                return redirect(f'/orders/list/')
+            else:
+                print('Form errors:', DeliveryStatusUpdateFormCreator.errors) 
+            
+
     context = {
         'payment':payment,
+        'DeliveryStatusUpdateFormCreator':DeliveryStatusUpdateFormCreator,
+
     }
-    return render(request,'html/orderDetails.html')
+    print(payment)
+    return render(request,'html/orderDetails.html',context)

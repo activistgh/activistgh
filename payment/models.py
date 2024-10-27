@@ -4,18 +4,18 @@ import uuid
 # Create your models here.
 class Payment(models.Model):
     # personal details 
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    phone = models.CharField(max_length=255)
-    email = models.EmailField()
-    order_notes = models.TextField()
+    first_name = models.CharField(max_length=255,blank=True)
+    last_name = models.CharField(max_length=255,blank=True)
+    phone = models.CharField(max_length=255,blank=True)
+    email = models.EmailField(blank=True)
+    order_notes = models.TextField(blank=True)
 
     # delivery Address
-    delivery_address = models.CharField(max_length=1000)
-    additional_info = models.TextField()
+    delivery_address = models.CharField(max_length=1000,blank=True)
+    additional_info = models.TextField(blank=True)
 
     # cart and payment
-    amount = models.PositiveIntegerField()
+    amount = models.PositiveIntegerField(blank=True)
     ref = models.UUIDField(default=uuid.uuid4,editable=False,unique=True)
    
     verified = models.BooleanField(default=False)

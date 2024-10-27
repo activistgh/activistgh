@@ -31,6 +31,7 @@ def adminLogin(request): #pass the login form in the admin login page
             
     return render(request,'html/adminLogin.html')
 
+@login_required(login_url='/')
 def orderList(request):
     payments = Payment.objects.all().filter(verified=True)
     context = {
