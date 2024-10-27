@@ -326,7 +326,7 @@
         <!-- Right Side: Cart items -->
         <div class="cart-items">
             <div style="display:flex; justify-content: space-between;align-items: center; margin-bottom: 10px;">
-                <h2 style="margin-top: auto; margin-bottom: auto;">Your Cart</h2><img src="{% static 'down.svg' %}"
+                <h2 style="margin-top: auto; margin-bottom: auto;">Cart Items</h2><img src="{% static 'down.svg' %}"
                     id="down-arrow" alt="down">
             </div>
             <div id="cart-items-container">
@@ -355,27 +355,30 @@
         </div>
         <!-- Left Side: Form for customer details -->
         <div class="checkout-form">
-            <h2>Personal Details</h2>
+            <h2>Order Details</h2>
 
             
                 {% csrf_token %}
                 <input type="text" id="cartData" name="cartData" hidden>
-                <div style="display: flex; justify-content: center; gap: 10px;">
-                    <div class="form-floating" style="width: 50%;">
-                        <input type="text" class="form-control" id="fname" value="{{payment.first_name}}" name="fname"
-                           readonly>
-                        <label for="fname">First name</label>
-                    </div>
-                    <div class="form-floating" style="width: 50%;">
-                        <input type="text" class="form-control" id="lname" value="{{payment.last_name}}" name="lname"
-                            readonly>
-                        <label for="lname">Last name</label>
-                    </div>
+                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                        <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px; width: 50%;">
+                            <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">First Name</label>
+                            <div>
+                                {{payment.first_name}}
+                            </div>
+                        </div>
+                        <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px; width: 50%;">
+                            <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">First Name</label>
+                            <div>
+                                {{payment.last_name}}
+                            </div>
+                        </div>
                 </div>
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" value="{{payment.email}}"
-                        name="email" required>
-                    <label for="floatingInput">Email address</label>
+                <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
+                    <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">Email</label>
+                    <div>
+                        {{payment.email}}
+                    </div>
                 </div>
                 <div class="form-floating mb-3">
                     <input id="phone" type="tel" value="{{payment.phone}}" style="min-width: 100%;" required />
