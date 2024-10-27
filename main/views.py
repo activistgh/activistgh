@@ -38,4 +38,4 @@ def orderList(request):
     
     }
     print(payments)
-    return render(request,'html/orderList.html',context)
+    return render(request,'html/list.html',context)
