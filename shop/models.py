@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from payment.models import Payment
 
 # Create your models here.
 
@@ -20,3 +21,16 @@ class RelatedImages(models.Model):
     image = models.ImageField(upload_to='relatedImages/')
 
 
+
+class Cart(models.Model):
+    payment = models.OneToOneField(Payment,on_delete=models.CASCADE)
+    unique_id = models.UUIDField(default=uuid.uuid4,editable=False,unique=True)
+
+
+class CartObject(models.Model):
+    cart = models.ForeignKey(Cart,on_delete=models.CASCADE,related_name='cart_objects')
+    product = models.ForeignKey(Product,on_delete=models.SET_NULL,null=True)
+    size = models.CharField(max_length=255)
+    quantity = models.IntegerField()
+
+    

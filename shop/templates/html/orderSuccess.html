@@ -22,7 +22,7 @@
 
         }
 
-      
+
         /* Cart items styling */
         .cart-items h2 {
             margin-bottom: 20px;
@@ -241,7 +241,7 @@
     </header>
     <div style="padding-top: 5px;">
         <a href="{% url 'shop' %}">
-            <div style="padding-left: 17px; margin-bottom: 10px;">
+            <div style="padding-left: 17px;">
                 <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                     stroke="#000000" stroke-width="0.00024000000000000003">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -280,67 +280,74 @@
     </div>
 
     <div class="alert alert-info" style="display: none;"></div>
-<div style="display: flex; justify-content: center; padding-top: 10%; padding-bottom: 10%;">
-    <div
-        style="display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px;  border: 1px solid #ddd; background-color: #f9f9f9; margin-top: 20px; margin-bottom: 20px; width: 300px;">
-        <h1 style="font-size: 24px; color: #333; margin-bottom: 10px;">Make Payment</h1>
-        <p style="font-size: 18px; color: #555; margin-bottom: 20px;">for GHS{{payment.amount}}</p>
-        <button id="django-paystack-button" onclick="payWithPayStack()"
-            style="padding: 10px 20px; font-size: 16px; color: #fff; background-color: #4CAF50; border: none; border-radius: 5px; cursor: pointer;">Make
-            payment</button>
-    </div>
-</div>
- 
-<footer style="text-align: center; padding: 20px; background-color: #000;">
-    <!-- Centering the logo -->
-    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo" style="max-width: 150px;">
+    <div style="display: flex; justify-content: center; padding-top: 30px; padding-bottom: 10%;">
+        <div
+            style="display: flex; flex-direction: column;  padding: 20px; border-radius: 8px;  border: 1px solid #ddd; margin-bottom: 20px; width: 300px;">
+            <h1 style="font-size: 24px; color: #333; margin-bottom: 10px;">Order Successfull.</h1>
+            <p style="font-size: 18px; color: #555; margin-bottom: 20px;">Follow up on your order here: <a href="#">Follow up</a> </p>
+            <p style="font-size: 18px; color: #555; margin-bottom: 20px;">Order details and followup link sent to: {{payment.email}}</a>
+            </p>
+            <p style="font-size: 18px; color: #555; margin-bottom: 20px;"><a href="{% url 'shop' %}">Return to shop</a>
+            </p>
+            <p style="font-size: 18px; color: #555; margin-bottom: 20px;">Contact us on: <br>
+                +233 0537666538<br>
+                acvststore@gmail.com
+            </p>
+        </div>
     </div>
 
-    <!-- Social media icons -->
-    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <!-- Instagram Icon -->
-        <a href="https://www.instagram.com/acvstinsta/">
-            <span style="margin-right: 25px;">
-                <svg width="50px" height="50px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z"
-                        stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z"
-                        stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)" fill="#ffffff">
-                    </rect>
-                    <rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)" stroke="#ffffff"
-                        stroke-linecap="round"></rect>
-                </svg>
-            </span>
-        </a>
 
-        <a href="https://x.com/acvstx/">
-            <!-- X (Twitter) Icon -->
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="30px" height="30px"
-                    style="margin-top: 9px;" viewBox="0 0 150 150" version="1.1">
-                    <path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;"
-                        d="M 89.285156 63.574219 L 145.136719 0 L 131.90625 0 L 83.390625 55.191406 L 44.671875 0 L 0 0 L 58.566406 83.464844 L 0 150.125 L 13.230469 150.125 L 64.429688 91.828125 L 105.328125 150.125 L 150 150.125 M 18.003906 9.769531 L 38.328125 9.769531 L 131.894531 140.835938 L 111.566406 140.835938 ">
-                    </path>
-                </svg>
-            </span>
-    </div>
+    <footer style="text-align: center; padding: 20px; background-color: #000;">
+        <!-- Centering the logo -->
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+            <img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo" style="max-width: 150px;">
+        </div>
+
+        <!-- Social media icons -->
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+            <!-- Instagram Icon -->
+    <a href="https://www.instagram.com/acvstinsta/">
+                <span style="margin-right: 25px;">
+                    <svg width="50px" height="50px" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z"
+                            stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z"
+                            stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)" fill="#ffffff">
+                        </rect>
+                        <rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)" stroke="#ffffff"
+                            stroke-linecap="round"></rect>
+                    </svg>
+                </span>
     </a>
 
-    <!-- Footer Links -->
-    <div style="margin-bottom: 20px;">
-        <div>Cause A Change</div>
-
+<a href="https://x.com/acvstx/">
+    <!-- X (Twitter) Icon -->
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="30px" height="30px" style="margin-top: 9px;"
+            viewBox="0 0 150 150" version="1.1">
+            <path style=" stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1;"
+                d="M 89.285156 63.574219 L 145.136719 0 L 131.90625 0 L 83.390625 55.191406 L 44.671875 0 L 0 0 L 58.566406 83.464844 L 0 150.125 L 13.230469 150.125 L 64.429688 91.828125 L 105.328125 150.125 L 150 150.125 M 18.003906 9.769531 L 38.328125 9.769531 L 131.894531 140.835938 L 111.566406 140.835938 ">
+            </path>
+        </svg>
+    </span>
     </div>
+</a>
 
-    <!-- Footer Copyright -->
-    <div>
-        <p class="copyright">&copy; 2024 ACTIVIST</p>
-    </div>
-</footer>
+        <!-- Footer Links -->
+        <div style="margin-bottom: 20px;">
+            <div>Cause A Change</div>
+           
+        </div>
+
+        <!-- Footer Copyright -->
+        <div>
+            <p class="copyright">&copy; 2024 ACTIVIST</p>
+        </div>
+    </footer>
+
 </body>
 
 <script>
@@ -361,74 +368,7 @@
         }
     }
 </script>
-<script>
 
-    function displayCartItems() {
-        let cartBox = document.getElementById('cartBox');  // Div to display cart items
-        cartBox.innerHTML = '';  // Clear existing content
-
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (cart.length > 0) {
-            cart.forEach(item => {
-                // Create HTML for each cart item
-                let cartItemDiv = `
-                    <div class="cart-item" style="padding: 10px; margin: 10px; display: flex; align-items: center;  position: relative;">
-                        <img src="${item.image_url}" alt="Product Image" width="100" style="border-radius: 8px; margin-right: 15px;">
-                        <div style="flex: 1; ">
-                        <div style="display:flex; gap:5px;">
-                            <p style="margin: 0; font-weight: bold; font-size: 14px;">${item.product_name}</p>
-                            <p style="margin: 0; font-size: 14px; "> x${item.quantity}</p>
-                        </div>
-                        <div style='display:flex; justify-content:space-between;'>
-                        <p style="margin: 0; font-size: 14px;">${item.selectedSize}</p>
-                            <p style="margin: 0; font-size: 14px;"> GHS ${item.price}</p>
-                        </div>
-                        </div>
-                        <button class="close-button" onclick="removeFromCart('${item.product_id_date}')" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 16px; color: #FF5722;">&times;</button>
-                    </div>
-                    `;
-
-                cartBox.innerHTML += cartItemDiv;  // Add the cart item to the cart box
-            });
-            const checkoutButton = `
-        <div style="text-align: center; margin: 20px;">
-            <button onclick="checkout()" style="padding: 10px 20px; width:100%; background-color: #228B22; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                Checkout
-            </button>
-        </div>`;
-            cartBox.innerHTML += checkoutButton;  // Append the checkout button
-        }
-        else {
-            cartBox.innerHTML = '<div class="empty-cart">Nothing in Cart</div>'
-        }
-    }
-
-    // Add the checkout button below the last cart item
-
-    // Placeholder function for checkout action
-    function checkout() {
-        alert('Proceeding to checkout...');
-        // You can implement your checkout logic here
-    }
-
-    function removeFromCart(productId) {
-        // Retrieve the current cart from localStorage
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-        // Filter out the item to be removed
-        cart = cart.filter(item => item.product_id_date !== productId);
-
-        // Save the updated cart back to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-        // Update the display
-        displayCartItems();
-    }
-
-    // Load and display cart items when the page loads
-    window.onload = displayCartItems;
-
-</script>
 <script>
     const menuBtn = document.getElementById('menu-btn');
     const cartBtn = document.getElementById('cart-btn');
@@ -480,109 +420,6 @@
         menu.classList.remove('active');
         cart.classList.remove('active');
         hideOverlay();
-    });
-</script>
-<!-- Script to handle local storage and cart display -->
-<script>
-    // Function to format the price
-    function formatPrice(price) {
-        return 'GHS' + price.toFixed(2);
-    }
-
-    // Function to render cart items from localStorage
-    function renderCartItems() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const cartContainer = document.getElementById('cart-items-container');
-        const totalPriceElement = document.getElementById('total-price');
-        let totalPrice = 0;
-
-        // Clear existing items
-        cartContainer.innerHTML = '';
-
-        // Render each cart item
-        cart.forEach(item => {
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
-            cartItem.innerHTML = `
-                    <img src="${item.image_url}" alt="${item.product_name}" />
-                    <div class="cart-item-details">
-                        <div class="cart-item-name">${item.product_name} x${item.quantity}</div>
-                        <div class="cart-item-price">${item.selectedSize}</div>
-                    </div>
-                    <div class="cart-item-price">${formatPrice(item.price)}</div>
-                `;
-            cartContainer.appendChild(cartItem);
-            totalPrice += item.price;
-        });
-
-        // Update total price
-        totalPriceElement.textContent = formatPrice(totalPrice);
-        document.getElementById('cart-total-sub').value = totalPrice
-
-    }
-
-    // Initialize the cart items on page load
-    window.onload = renderCartItems;
-</script>
-<script src="https://js.paystack.co/v2/inline.js"></script>
-<script>
-    // function payWithPayStack(){
-    //     let currency = 'GHS';
-    //     let plan = "";
-    //     let ref = "{{payment.ref}}"
-    //     let obj = {
-    //         key: "{{paystack_public_key}}",
-    //         email: "{{payment.email}}",
-    //         amount: "{{payment.amount}}",
-    //         ref: ref,
-    //         callback: function(response){
-    //             window.location.href = "{url 'verify-payment' payment.ref }"
-    //         }
-    //     }
-    //     if (Boolean(currency)){
-    //         obj.currency = currency.toUpperCase()
-    //     }
-    //     if (Boolean(plan)){
-    //         obj.plan = plan;
-
-    //     }
-    //     var handler = PaystackPop.setup(obj)
-    //     handler.openIframe();
-    // }
-
-    function payWithPayStack() {
-        const paystack = new PaystackPop();
-
-        paystack.newTransaction({
-
-            key: "pk_test_b861b5ffacd3f3a4039ef8952f4a13b9cdff9c2a",
-            email: "{{payment.email}}",
-            amount: "{{payment.amount_value}}",
-
-            onSuccess: (transaction) => {
-                localStorage.removeItem('cart')
-
-              window.location.href = '/orderSuccess/{{payment.ref}}'
-
-            },
-
-            onCancel: () => {
-
-                alert('payment Canceled')
-
-            }
-
-        });
-    }
-
-</script>
-<script>
-    const phoneInputField = document.querySelector("#phone");
-
-    const phoneInput = window.intlTelInput(phoneInputField, {
-        preferredCountries: ["gh"],
-        utilsScript:
-            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
 </script>
 

@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
 from .models import Product, RelatedImages
 from payment.models import Payment
-from django.conf import settings
+from django.conf import settings 
+from .models import Cart, CartObject
+import ast
+import json
 # Create your views here.
 
 def shop(request):
@@ -26,7 +29,7 @@ def productDetail(request,unique_id):
 def makePayment(request,ref):
     payment = Payment.objects.get(ref=ref)
     paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
-    print(paystack_public_key)
+    
 
     context ={
         'payment':payment,
@@ -37,6 +40,12 @@ def makePayment(request,ref):
 def checkout(request):
     if request.method == 'POST':
         if 'pay' in request.POST:
+            cartData = request.POST.get('cartData')
+            cartData =ast.literal_eval(cartData)
+
+            
+
+            # delivery info 
             firstName = request.POST.get('fname')
             lastName = request.POST.get('lname')
             email = request.POST.get('email')
@@ -46,10 +55,18 @@ def checkout(request):
             deliveryInfo = request.POST.get('deliveryInfo')
             cart_total = request.POST.get('cart-total')
 
-            print(firstName,lastName,email,phone,orderNotes,deliveryAddress,deliveryInfo,cart_total)
             payment = Payment(first_name=firstName,last_name=lastName,email=email,phone=phone,order_notes=orderNotes,delivery_address=deliveryAddress,additional_info=deliveryInfo,amount=float(cart_total))
             payment.save()
-            print(payment)
+            
+            # on payment save create cart for payment
+            cart = Cart.objects.get_or_create(payment=payment) # create cart for payment
+            cart[0].save()
+
+            # loop through cart object list to append to cart
+            for obj in cartData:
+                product = Product.objects.get(unique_id=obj['product_id'])
+                cartObj = CartObject(cart=cart[0],product=product,size=obj['selectedSize'],quantity=obj['quantity'] )
+                cartObj.save()
 
 
             return redirect(makePayment,payment.ref)
@@ -57,3 +74,25 @@ def checkout(request):
      
     return render(request,'html/checkout.html')
 
+
+def orderSuccess(request,ref):
+    payment = Payment.objects.get(ref=ref)
+    payment.verified = True
+    payment.save()
+
+    # cart 
+    cart = Cart.objects.get(payment=payment)
+
+    context ={
+        'payment':payment,
+        'cart':cart,
+    }
+    return render(request,'html/orderSuccess.html',context)
+
+def orderDetails(request,ref):
+    payment = Payment.objects.get(ref=ref)
+    
+    context = {
+        'payment':payment,
+    }
+    return render(request,'html/orderDetails.html')
