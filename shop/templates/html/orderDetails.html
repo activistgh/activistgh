@@ -401,11 +401,45 @@
                 </div>
                 <h2>Delivery Details</h2>
             <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
-                <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">Delivery Address</label>
+                <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">Country:</label>
                 <div>
-                    {{payment.delivery_address}}
+                    {{payment.destination_country}}
                 </div>
             </div>
+                    <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
+                        <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">Street Address 1:</label>
+                        <div>
+                            {{payment.street_address_1}}
+                        </div>
+                    </div>
+                        <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
+                            <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">Street Address 2:</label>
+                            <div>
+                                {% if payment.street_address_2 %}
+                                    {{payment.street_address_2}}
+                                {% else %}
+                                    No Street Address 2
+                                {% endif %}
+                            </div>
+                        </div>
+                                <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
+                                    <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">City:</label>
+                                    <div>
+                                        {{payment.city}}
+                                    </div>
+                                </div>
+                                    <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
+                                        <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">State:</label>
+                                        <div>
+                                            {{payment.state}}
+                                        </div>
+                                    </div>
+                                    <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
+                                        <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">Zip code:</label>
+                                        <div>
+                                            {{payment.zip_code}}
+                                        </div>
+                                    </div>
             <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
                 <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">Additional Delivery Info</label>
                 <div>

@@ -11,7 +11,13 @@ class Payment(models.Model):
     order_notes = models.TextField(blank=True)
 
     # delivery Address
-    delivery_address = models.CharField(max_length=1000,blank=True)
+    street_address_1 = models.CharField(max_length=255, verbose_name='Street Address Line 1', null=True)
+    street_address_2 = models.CharField(max_length=255, blank=True, null=True, verbose_name='Street Address Line 2 (optional)')
+    city = models.CharField(max_length=100, null=True)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    zip_code = models.CharField(max_length=20, null=True)
+    destination_country = models.CharField(max_length=100, null=True)
+
     additional_info = models.TextField(blank=True)
 
     # cart and payment

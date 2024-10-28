@@ -52,11 +52,16 @@ def checkout(request):
             email = request.POST.get('email')
             phone = request.POST.get('phone')
             orderNotes = request.POST.get('orderNotes')
-            deliveryAddress = request.POST.get('deliveryAddress')
+            street_address_1 = request.POST.get('street_address_1')
+            street_address_2 = request.POST.get('street_address_2')
+            city = request.POST.get('city')
+            state = request.POST.get('state')
+            zip_code = request.POST.get('zip')
+            destination_country = request.POST.get('destination_country')
             deliveryInfo = request.POST.get('deliveryInfo')
             cart_total = request.POST.get('cart-total')
 
-            payment = Payment(first_name=firstName,last_name=lastName,email=email,phone=phone,order_notes=orderNotes,delivery_address=deliveryAddress,additional_info=deliveryInfo,amount=float(cart_total))
+            payment = Payment(first_name=firstName,last_name=lastName,email=email,phone=phone,order_notes=orderNotes,street_address_1=street_address_1,street_address_2=street_address_2,city=city,state=state,zip_code=zip_code,destination_country=destination_country,additional_info=deliveryInfo,amount=float(cart_total))
             payment.save()
             
             # on payment save create cart for payment
