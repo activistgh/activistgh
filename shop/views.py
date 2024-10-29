@@ -47,7 +47,7 @@ def makePayment(request,ref):
             items[item.product.tag] += item.quantity
         delivery_cost = generate_shipping_cost(items,payment.destination_country)
         print(delivery_cost)
-        if 'N/A' in delivery_cost:
+        if 'N/A' in str(delivery_cost):
             delivery_cost = 0
             ship_to = False #
         else:
