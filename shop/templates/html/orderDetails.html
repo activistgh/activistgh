@@ -380,10 +380,13 @@
                         {{payment.email}}
                     </div>
                 </div>
-                <div class="form-floating mb-3">
-                    <input id="phone" type="tel" value="{{payment.phone}}" style="min-width: 100%;" required />
+                <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
+                    <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">Phone</label>
+                    <div>
+                        Country code: +{{payment.country_code}} <br>
+                        Phone: {{payment.phone}}
+                    </div>
                 </div>
-
                 
                 <div>
                 <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">

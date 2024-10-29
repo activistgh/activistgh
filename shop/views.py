@@ -4,6 +4,7 @@ from .forms import DeliveryStatusUpdateForm
 from payment.models import Payment
 from django.conf import settings 
 from .models import Cart, CartObject
+from .deliveryRatesGen import generate_shipping_cost
 import ast
 import json
 # Create your views here.
@@ -30,7 +31,24 @@ def productDetail(request,unique_id):
 def makePayment(request,ref):
     payment = Payment.objects.get(ref=ref)
     paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
-    
+
+    if payment.destination_country != 'Ghana':
+        # international delivery calculate for price:
+        # need to quantify the item's into right data form
+
+        items = {
+            'tee':0,
+            'hoodie':0,
+            'shorts':0,
+            'joggers':0,
+        }
+        for item in payment.cart.cart_objects.all():
+            items[item.product.tag] += item.quantity
+        delivery_cost = generate_shipping_cost(items,payment.destination_country)
+        payment.delivery_price =round(delivery_cost,2)
+        payment.save()
+
+        print(items,delivery_cost)
 
     context ={
         'payment':payment,
@@ -60,8 +78,9 @@ def checkout(request):
             destination_country = request.POST.get('destination_country')
             deliveryInfo = request.POST.get('deliveryInfo')
             cart_total = request.POST.get('cart-total')
+            country_code = request.POST.get('country_code')
 
-            payment = Payment(first_name=firstName,last_name=lastName,email=email,phone=phone,order_notes=orderNotes,street_address_1=street_address_1,street_address_2=street_address_2,city=city,state=state,zip_code=zip_code,destination_country=destination_country,additional_info=deliveryInfo,amount=float(cart_total))
+            payment = Payment(first_name=firstName,last_name=lastName,email=email,country_code=country_code,phone=phone,order_notes=orderNotes,street_address_1=street_address_1,street_address_2=street_address_2,city=city,state=state,zip_code=zip_code,destination_country=destination_country,additional_info=deliveryInfo,amount=float(cart_total))
             payment.save()
             
             # on payment save create cart for payment

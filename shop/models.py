@@ -33,4 +33,7 @@ class CartObject(models.Model):
     size = models.CharField(max_length=255)
     quantity = models.IntegerField()
 
+    @property
+    def price(self):
+        return self.quantity * self.product.price
     

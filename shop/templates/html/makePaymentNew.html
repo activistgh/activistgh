@@ -280,17 +280,118 @@
     </div>
 
     <div class="alert alert-info" style="display: none;"></div>
-<div style="display: flex; justify-content: center; padding-top: 10%; padding-bottom: 10%;">
-    <div
-        style="display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: 8px;  border: 1px solid #ddd; background-color: #f9f9f9; margin-top: 20px; margin-bottom: 20px; width: 300px;">
-        <h1 style="font-size: 24px; color: #333; margin-bottom: 10px;">Make Payment</h1>
-        <p style="font-size: 18px; color: #555; margin-bottom: 20px;">for GHS{{payment.amount}}</p>
-        <button id="django-paystack-button" onclick="payWithPayStack()"
-            style="padding: 10px 20px; font-size: 16px; color: #fff; background-color: #4CAF50; border: none; border-radius: 5px; cursor: pointer;">Make
-            payment</button>
+<div class="container mt-6 mb-7">
+    <div class="row justify-content-center">
+        <div class="col-lg-12 col-xl-7">
+            <div class="card">
+                <div class="card-body p-5">
+                    <h2>
+                        {{payment.first_name}} {{payment.last_name}}
+                    </h2>
+                    <p class="fs-sm">
+                        This is the receipt for a payment of GHS<strong>{{payment.total_actual}}</strong> (Ghana Cedis) to ACTIVIST.
+                    </p>
+
+                    <div class="border-top border-gray-200 pt-4 mt-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-muted mb-2">Payment No.</div>
+                                <strong>{{payment.order_id}}</strong>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <div class="text-muted mb-2">Payment Date</div>
+                                <strong>{{payment.date_created}}</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-top border-gray-200 mt-4 py-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="text-muted mb-2">Client</div>
+                                <strong>
+                                    {{payment.first_name}} {{payment.last_name}}
+                                </strong>
+                                <p class="fs-sm">
+                                  {{payment.street_address_1}} {% if payment.street_address_2%}
+                                {{payment.street_address_2}}
+                                {% endif %}
+                                    <br>
+                                    <a href="#!" class="text-purple">{{payment.email}}
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <div class="text-muted mb-2">Payment To</div>
+                                <strong>
+                                    ACTIVIST
+                                </strong>
+                                <p class="fs-sm">
+                                    ACCRA, GHANA
+                                    <br>
+                                    <a href="#!" class="text-purple">acvststore@gmail.com
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table border-bottom border-gray-200 mt-3">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm px-0">Description</th>
+                                <th scope="col" class="fs-sm text-dark text-uppercase-bold-sm text-end px-0">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in payment.cart.cart_objects.all %}
+                            <tr>
+                                <td class="px-0">{{item.product.name}} - {{item.size}} x{{item.quantity}}</td>
+                                <td class="text-end px-0">GHS{{item.price}}0</td>
+                            </tr>
+                            {% endfor %}
+      
+                        </tbody>
+                    </table>
+
+                    <div class="mt-5">
+                        <div class="d-flex justify-content-end">
+                            <p class="text-muted me-3">Subtotal:</p>
+                            <span>GHS{{payment.amount}}</span>
+                        </div>
+              {% if payment.delivery_price == 0 %}
+              {% else %}
+                        <div class="d-flex justify-content-end">
+                            <p class="text-muted me-3">Delivery Fee</p>
+                            <span>GHS{{payment.delivery_actual}}</span>
+                        </div>
+                {% endif %}
+                        <div class="d-flex justify-content-end mt-3">
+                            <h5 class="me-3">Total:</h5>
+                            <h5 class="text-success">GHS{{payment.total_actual}}</h5>
+                        </div>
+                    </div>
+                
+                </div>
+                <a href="#!"  id="django-paystack-button" onclick="payWithPayStack()"
+                    class="btn btn-dark btn-lg card-footer-btn justify-content-center text-uppercase-bold-sm hover-lift-light">
+                    <span class="svg-icon text-white me-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 512 512">
+                            <title>ionicons-v5-g</title>
+                            <path d="M336,208V113a80,80,0,0,0-160,0v95"
+                                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                            </path>
+                            <rect x="96" y="208" width="320" height="272" rx="48" ry="48"
+                                style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                            </rect>
+                        </svg>
+                    </span>
+                    Pay Now
+                </a>
+            </div>
+        </div>
     </div>
 </div>
- 
 <footer style="text-align: center; padding: 20px; background-color: #000;">
     <!-- Centering the logo -->
     <div style="display: flex; justify-content: center; margin-bottom: 20px;">
@@ -342,93 +443,7 @@
     </div>
 </footer>
 </body>
-
-<script>
-    down_arrow = document.getElementById('down-arrow')
-    cart_div = document.getElementById('cart-items-container')
-    total_price_div = document.getElementById('total-price-div')
-    down_arrow.onclick = () => {
-        if (down_arrow.src.includes('down')) {
-            down_arrow.src = '{% static "up.svg" %}'
-            cart_div.style.display = 'none'
-            total_price_div.style.display = 'none'
-
-        }
-        else if (down_arrow.src.includes('up')) {
-            down_arrow.src = '{% static "down.svg" %}'
-            cart_div.style.display = 'block'
-            total_price_div.style.display = 'flex'
-        }
-    }
-</script>
-<script>
-
-    function displayCartItems() {
-        let cartBox = document.getElementById('cartBox');  // Div to display cart items
-        cartBox.innerHTML = '';  // Clear existing content
-
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (cart.length > 0) {
-            cart.forEach(item => {
-                // Create HTML for each cart item
-                let cartItemDiv = `
-                    <div class="cart-item" style="padding: 10px; margin: 10px; display: flex; align-items: center;  position: relative;">
-                        <img src="${item.image_url}" alt="Product Image" width="100" style="border-radius: 8px; margin-right: 15px;">
-                        <div style="flex: 1; ">
-                        <div style="display:flex; gap:5px;">
-                            <p style="margin: 0; font-weight: bold; font-size: 14px;">${item.product_name}</p>
-                            <p style="margin: 0; font-size: 14px; "> x${item.quantity}</p>
-                        </div>
-                        <div style='display:flex; justify-content:space-between;'>
-                        <p style="margin: 0; font-size: 14px;">${item.selectedSize}</p>
-                            <p style="margin: 0; font-size: 14px;"> GHS ${item.price}</p>
-                        </div>
-                        </div>
-                        <button class="close-button" onclick="removeFromCart('${item.product_id_date}')" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 16px; color: #FF5722;">&times;</button>
-                    </div>
-                    `;
-
-                cartBox.innerHTML += cartItemDiv;  // Add the cart item to the cart box
-            });
-            const checkoutButton = `
-        <div style="text-align: center; margin: 20px;">
-            <button onclick="checkout()" style="padding: 10px 20px; width:100%; background-color: #228B22; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                Checkout
-            </button>
-        </div>`;
-            cartBox.innerHTML += checkoutButton;  // Append the checkout button
-        }
-        else {
-            cartBox.innerHTML = '<div class="empty-cart">Nothing in Cart</div>'
-        }
-    }
-
-    // Add the checkout button below the last cart item
-
-    // Placeholder function for checkout action
-    function checkout() {
-        alert('Proceeding to checkout...');
-        // You can implement your checkout logic here
-    }
-
-    function removeFromCart(productId) {
-        // Retrieve the current cart from localStorage
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-        // Filter out the item to be removed
-        cart = cart.filter(item => item.product_id_date !== productId);
-
-        // Save the updated cart back to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-        // Update the display
-        displayCartItems();
-    }
-
-    // Load and display cart items when the page loads
-    window.onload = displayCartItems;
-
-</script>
+    
 <script>
     const menuBtn = document.getElementById('menu-btn');
     const cartBtn = document.getElementById('cart-btn');
@@ -483,47 +498,7 @@
     });
 </script>
 <!-- Script to handle local storage and cart display -->
-<script>
-    // Function to format the price
-    function formatPrice(price) {
-        return 'GHS' + price.toFixed(2);
-    }
 
-    // Function to render cart items from localStorage
-    function renderCartItems() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const cartContainer = document.getElementById('cart-items-container');
-        const totalPriceElement = document.getElementById('total-price');
-        let totalPrice = 0;
-
-        // Clear existing items
-        cartContainer.innerHTML = '';
-
-        // Render each cart item
-        cart.forEach(item => {
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
-            cartItem.innerHTML = `
-                    <img src="${item.image_url}" alt="${item.product_name}" />
-                    <div class="cart-item-details">
-                        <div class="cart-item-name">${item.product_name} x${item.quantity}</div>
-                        <div class="cart-item-price">${item.selectedSize}</div>
-                    </div>
-                    <div class="cart-item-price">${formatPrice(item.price)}</div>
-                `;
-            cartContainer.appendChild(cartItem);
-            totalPrice += item.price;
-        });
-
-        // Update total price
-        totalPriceElement.textContent = formatPrice(totalPrice);
-        document.getElementById('cart-total-sub').value = totalPrice
-
-    }
-
-    // Initialize the cart items on page load
-    window.onload = renderCartItems;
-</script>
 <script src="https://js.paystack.co/v2/inline.js"></script>
 <script>
     // function payWithPayStack(){
@@ -549,15 +524,19 @@
     //     var handler = PaystackPop.setup(obj)
     //     handler.openIframe();
     // }
-
+    
+    delivery_cost  = Number('{{payment.delivery_price}}')*16*100
+    total = Number('{{payment.amount_value}}')+ delivery_cost
     function payWithPayStack() {
         const paystack = new PaystackPop();
+
+
 
         paystack.newTransaction({
 
             key: "pk_test_b861b5ffacd3f3a4039ef8952f4a13b9cdff9c2a",
             email: "{{payment.email}}",
-            amount: "{{payment.amount_value}}",
+            amount: `${total}`,
 
             onSuccess: (transaction) => {
                 localStorage.removeItem('cart')
@@ -576,14 +555,6 @@
     }
 
 </script>
-<script>
-    const phoneInputField = document.querySelector("#phone");
 
-    const phoneInput = window.intlTelInput(phoneInputField, {
-        preferredCountries: ["gh"],
-        utilsScript:
-            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-    });
-</script>
 
 </html>

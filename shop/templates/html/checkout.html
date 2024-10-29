@@ -405,6 +405,7 @@ line-height: 1rem;
                 </div>
                 <div>
                     <input type="number" name="cart-total" id="cart-total-sub" hidden>
+                    <input type="text" name="country_code" id="country_code" hidden>
                 </div>
 
                 <button type="submit" name="pay"
@@ -614,18 +615,20 @@ line-height: 1rem;
         utilsScript:
             "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
-    const checkout_form = document.getElementById('checkout-form-sub')
-
-    checkout_form.addEventListener('submit', function(event){
-        event.preventDefault();
-        const phoneNumber = phoneInput.getNumber();
-        phone = document.getElementById('phone')
-        phone.value = phoneNumber
-        checkout_form.submit();
-
+   
+</script>
+<script>
+    
+    country_li = document.querySelectorAll('li.iti__country')
+    country_code = document.getElementById('country_code')
+    country_code.value = '233'
+    country_li.forEach(li =>{
+        li.onclick = () =>{
+           
+            country_code.value = li.getAttribute('data-dial-code')
+        }
     })
 
-   
 </script>
 
 </html>
