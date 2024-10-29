@@ -46,11 +46,12 @@ def makePayment(request,ref):
         for item in payment.cart.cart_objects.all():
             items[item.product.tag] += item.quantity
         delivery_cost = generate_shipping_cost(items,payment.destination_country)
-        if delivery_cost == 'N/A':
+        print(delivery_cost)
+        if 'N/A' in delivery_cost:
             delivery_cost = 0
             ship_to = False #
         else:
-            payment.delivery_price =round(delivery_cost,2)
+            payment.delivery_price = round(delivery_cost,2)
             payment.save()
 
         print(items,delivery_cost)
