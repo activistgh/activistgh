@@ -51,7 +51,7 @@ def makePayment(request,ref):
             ship_to = False #
         else:
             payment.delivery_price =round(delivery_cost,2)
-        p   payment.save()
+            payment.save()
 
         print(items,delivery_cost)
 
