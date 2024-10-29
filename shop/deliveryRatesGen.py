@@ -432,7 +432,7 @@ def calculate_dimensional_weight(length, width, height, divisor=5000):
 def calculate_shipping_cost(destination_country, items, margin_percentage=10):
     """Calculate the shipping cost to a specific country based on distance, item weight, and dimensional weight."""
     if destination_country not in DISTANCE_TO_COUNTRY:
-        return f"No distance data available for {destination_country}"
+        return "N/A"
 
     # Get the distance and regional base rate
     distance_km = DISTANCE_TO_COUNTRY[destination_country]

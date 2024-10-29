@@ -360,6 +360,9 @@
                             <span>GHS{{payment.amount}}</span>
                         </div>
               {% if payment.delivery_price == 0 %}
+                        {% if ship_to == False %}
+                        Delivery Price will be communicated to you.
+                        {% endif %}
               {% else %}
                         <div class="d-flex justify-content-end">
                             <p class="text-muted me-3">Delivery Fee</p>

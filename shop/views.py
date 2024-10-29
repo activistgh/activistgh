@@ -31,6 +31,7 @@ def productDetail(request,unique_id):
 def makePayment(request,ref):
     payment = Payment.objects.get(ref=ref)
     paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
+    ship_to = True
 
     if payment.destination_country != 'Ghana':
         # international delivery calculate for price:
@@ -45,14 +46,19 @@ def makePayment(request,ref):
         for item in payment.cart.cart_objects.all():
             items[item.product.tag] += item.quantity
         delivery_cost = generate_shipping_cost(items,payment.destination_country)
-        payment.delivery_price =round(delivery_cost,2)
-        payment.save()
+        if delivery_cost == 'N/A':
+            delivery_cost = 0
+            ship_to = False #
+        else:
+            payment.delivery_price =round(delivery_cost,2)
+        p   payment.save()
 
         print(items,delivery_cost)
 
     context ={
         'payment':payment,
         'paystack_public_key':paystack_public_key,
+        'ship_to':ship_to,
     }
     return render(request,'html/makePaymentNew.html',context)
 
