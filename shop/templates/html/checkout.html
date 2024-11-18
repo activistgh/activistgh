@@ -413,7 +413,7 @@ line-height: 1rem;
                     <input type="text" name="country_code" id="country_code" hidden>
                 </div>
 
-                <button type="submit" name="pay"
+                <button type="submit" name="pay" id="payButton"
                     style="width:100%;padding:10px;border:none;background-color:#28a745;color:white;font-size:18px;border-radius:5px;">Proceed
                     to pay</button>
             </form>
@@ -518,7 +518,6 @@ line-height: 1rem;
     const closeMenuBtn = document.getElementById('close-menu');
     const closeCartBtn = document.getElementById('close-cart');
     const menu = document.getElementById('menu');
-    const cart = document.getElementById('cart');
     const overlay = document.getElementById('overlay');
 
     // Footer buttons
@@ -565,6 +564,9 @@ line-height: 1rem;
         hideOverlay();
     });
 </script>
+<script>
+
+</script>
 <!-- Script to handle local storage and cart display -->
 <script>
     // Function to format the price
@@ -575,6 +577,12 @@ line-height: 1rem;
     // Function to render cart items from localStorage
     function renderCartItems() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // disable checkout if cart is empty
+        if (cart.length ==  0){
+            document.getElementById('payButton').disabled = true;
+            alert('Checkout disabled. Cart is empty.')
+        }
+        
         const cartContainer = document.getElementById('cart-items-container');
         const totalPriceElement = document.getElementById('total-price');
         let totalPrice = 0;

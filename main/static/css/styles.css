@@ -2849,19 +2849,19 @@ textarea.form-control-lg {
 
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #8f1424;
-  --bs-btn-border-color: #8f1424;
+  --bs-btn-bg:#0152ae;
+  --bs-btn-border-color: #0152ae;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #8f1424;
-  --bs-btn-hover-border-color: #8f1424;
+  --bs-btn-hover-bg: #0152ae;
+  --bs-btn-hover-border-color: #0152ae;
   --bs-btn-focus-shadow-rgb: 123, 175, 172;
   --bs-btn-active-color: #fff;
-  --bs-btn-active-bg:#8f1424 ;
-  --bs-btn-active-border-color: #8f1424;
+  --bs-btn-active-bg:#0152ae ;
+  --bs-btn-active-border-color: #0152ae;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: ##8f1424;
-  --bs-btn-disabled-border-color: #8f1424;
+  --bs-btn-disabled-bg: ##0152ae;
+  --bs-btn-disabled-border-color: #0152ae;
 }
 
 .btn-secondary {
@@ -10986,7 +10986,7 @@ body {
 #mainNav .navbar-toggler {
   font-size: 80%;
   padding: 0.75rem;
-  color: #8f1424;
+  color: #0152ae;
   border: 1px solid ;
 }
 #mainNav .navbar-toggler:focus {
@@ -11069,7 +11069,7 @@ body {
   height: auto;
   min-height: 35rem;
   padding: 15rem 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../assets/img/main.jpg");
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../assets/img/p10.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
