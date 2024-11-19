@@ -508,7 +508,7 @@
                    
                     <h1 class="display-5 fw-bolder">{{product.name}}</h1>
                     <div class="fs-5 mb-5">
-                        <span>Ghs{{product.price}}0</span>
+                        <span>GH₵{{product.price}}0</span>
                     </div>
                     <div id="optionBox" class="dropdown" >
                         <div class="dropdown-selected" id="drop-down-select" onclick="toggleDropdown()" >Select size</div>
@@ -748,7 +748,7 @@
 <script>
         // Function to format the price
         function formatPrice(price) {
-            return 'GHS' + price.toFixed(2);
+            return 'GH₵' + price.toFixed(2);
         }
 
     function displayCartItems() {
@@ -774,7 +774,7 @@
                         </div>
                         <div style='display:flex; justify-content:space-between;'>
                         <p style="margin: 0; font-size: 14px;">${item.selectedSize}</p>
-                            <p style="margin: 0; font-size: 14px;"> GHS ${item.price}</p>
+                            <p style="margin: 0; font-size: 14px;"> GH₵ ${item.price}</p>
                         </div>
                         </div>
                         <button class="close-button" onclick="removeFromCart('${item.product_id_date}')" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 16px; color: #FF5722;">&times;</button>
