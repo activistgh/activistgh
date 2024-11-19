@@ -25,7 +25,8 @@ def adminLogin(request): #pass the login form in the admin login page
             login(request,user)
             return redirect('/orders/list')
         else:
-            messages.error('Error Login in')
+            messages.error(request,'Error Login in')
+            return redirect(adminLogin)
 
         
             
