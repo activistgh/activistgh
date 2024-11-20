@@ -10,7 +10,7 @@ import json
 # Create your views here.
 
 def shop(request):
-    products = Product.objects.all().order_by('id')
+    products = Product.objects.all().order_by('order_number')
     context ={
         'products':products,
     }
