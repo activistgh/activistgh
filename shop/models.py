@@ -11,6 +11,7 @@ class Product(models.Model):
     description = models.TextField(blank=True,default=name)
     details = models.TextField(blank=True,default=name)
     image = models.ImageField(upload_to='productImages/')
+    order_number = models.PositiveIntegerField(null=True,blank=True)
     tag = models.CharField(max_length=255,null=True,blank=True)
 
     def __str__(self):
