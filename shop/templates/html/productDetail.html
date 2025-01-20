@@ -511,6 +511,18 @@
                         <span>GH₵{{product.price}}0</span>
                     </div>
                     <div id="optionBox" class="dropdown" >
+                        {% if 'Denim' in product.name %}
+                              <div class="dropdown-selected" id="drop-down-select" onclick="toggleDropdown()" >Select size</div>
+                        <div class="dropdown-options" id="dropdownOptions">
+                            <div class="size-box" id="size-28" onclick="selectSize('28')">28</div>
+                            <div class="size-box" id="size-30" onclick="selectSize('30')">30</div>
+                            <div class="size-box" id="size-32" onclick="selectSize('32')">32</div>
+                            <div class="size-box" id="size-34" onclick="selectSize('34')">34</div>
+                            <div class="size-box" id="size-36" onclick="selectSize('36')">36</div>
+                            <div class="size-box" id="size-38" onclick="selectSize('38')">38</div>
+                            <div class="size-box" id="size-40" onclick="selectSize('40')">40</div>
+                        </div>
+                        {% else %}
                         <div class="dropdown-selected" id="drop-down-select" onclick="toggleDropdown()" >Select size</div>
                         <div class="dropdown-options" id="dropdownOptions">
                             <div class="size-box" id="size-3XL" onclick="selectSize('3XL')">3XL</div>
@@ -519,6 +531,7 @@
                             <div class="size-box" id="size-XL" onclick="selectSize('XL')">XL</div>
                             <div class="size-box" id="size-2XL" onclick="selectSize('2XL')">2XL</div>
                         </div>
+                        {% endif %}
                     </div>
 
                         <div class="d-flex" id="addToCartm" style="margin: 15px; gap: 5px; z-index: 0;">
@@ -666,7 +679,11 @@
             document.getElementById(`size-${size}`).classList.add('selected');
             document.getElementById("dropdownOptions").style.display = "none";
         }
+        {% if 'Denim' in product.name %}
+            selectSize('28')
+        {% else %}
         selectSize('3XL')
+        {% endif %}
         // Close the dropdown if clicked outside
         document.addEventListener('click', function (event) {
             const dropdown = document.getElementById("optionBox");
