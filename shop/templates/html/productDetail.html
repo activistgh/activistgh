@@ -561,7 +561,17 @@
                         <div style="width: 100%; display: flex; justify-content: space-between;"><span>Size Guide</span><span
                                 class="symbol">+</span></div>
                         <div class="content" style="width: 100%; text-align: center;">
-                            
+                            {% if 'Denim' in product.name %}
+                            <p><strong>28</strong>: Waist 28", Hips 34-36"</p>
+                            <p><strong>30</strong>: Waist 30", Hips 36-38"</p>
+                            <p><strong>32</strong>: Waist 32", Hips 38-40"</p>
+                            <p><strong>34</strong>: Waist 34", Hips 40-42"</p>
+                            <p><strong>36</strong>: Waist 36", Hips 42-44"</p>
+                            <p><strong>38</strong>: Waist 38", Hips 44-46"</p>
+                            <p><strong>40</strong>: Waist 40", Hips 46-48"</p>
+                            <p><strong>How to Measure:</strong> Measure around the waist and hips at their fullest points.</p>
+
+                            {% else %}
                             <p><strong>3XL</strong>: Chest 52-54", Waist 46-48", Hips 54-56"</p>
                             <p><strong>M</strong>: Chest 38-40", Waist 32-34", Hips 39-41"</p>
                             <p><strong>L</strong>: Chest 42-44", Waist 36-38", Hips 43-45"</p>
@@ -569,7 +579,7 @@
                             <p><strong>2XL</strong>: Chest 50-52", Waist 44-46", Hips 51-53"</p>
                             
                             <p><strong>How to Measure:</strong> Measure around the chest, waist, and hips at their fullest points.</p>
-                            
+                            {% endif %}
                         </div>
                     </div>
                     
