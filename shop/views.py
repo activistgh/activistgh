@@ -31,7 +31,7 @@ def productDetail(request,unique_id):
 def makePayment(request,ref):
     payment = Payment.objects.get(ref=ref)
     paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
-    ship_to = True
+    ship_to = False
 
     # if payment.destination_country != 'Ghana':
     #     # international delivery calculate for price:

@@ -530,7 +530,7 @@
     //     handler.openIframe();
     // }
     
-    delivery_cost  = Number('{{payment.delivery_price}}')*16*100
+    delivery_cost  = 0 
     total = Number('{{payment.amount_value}}')+ delivery_cost
     function payWithPayStack() {
         const paystack = new PaystackPop();
