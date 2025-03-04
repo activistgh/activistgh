@@ -33,29 +33,29 @@ def makePayment(request,ref):
     paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
     ship_to = True
 
-    if payment.destination_country != 'Ghana':
-        # international delivery calculate for price:
-        # need to quantify the item's into right data form
+    # if payment.destination_country != 'Ghana':
+    #     # international delivery calculate for price:
+    #     # need to quantify the item's into right data form
 
-        items = {
-            'tee':0,
-            'hoodie':0,
-            'shorts':0,
-            'joggers':0,
-        }
-        for item in payment.cart.cart_objects.all():
-            items[item.product.tag] += item.quantity
-        delivery_cost = generate_shipping_cost(items,payment.destination_country)
-        print(delivery_cost)
-        if 'N/A' in str(delivery_cost):
-            delivery_cost = 0
-            ship_to = False #
-        else:
-            # payment.delivery_price = round(delivery_cost,2)
-            payment.delivery_price = 0
-            payment.save()
+    #     items = {
+    #         'tee':0,
+    #         'hoodie':0,
+    #         'shorts':0,
+    #         'joggers':0,
+    #     }
+    #     for item in payment.cart.cart_objects.all():
+    #         items[item.product.tag] += item.quantity
+    #     delivery_cost = generate_shipping_cost(items,payment.destination_country)
+    #     print(delivery_cost)
+    #     if 'N/A' in str(delivery_cost):
+    #         delivery_cost = 0
+    #         ship_to = False #
+    #     else:
+    #         # payment.delivery_price = round(delivery_cost,2)
+    #         payment.delivery_price = 0
+    #         payment.save()
 
-        print(items,delivery_cost)
+    #     print(items,delivery_cost)
 
     context ={
         'payment':payment,
