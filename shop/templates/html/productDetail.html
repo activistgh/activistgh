@@ -548,7 +548,10 @@
                         </div>
                         {% endif %}
                         {% else %}
-                        <div style="display: none;" class="size-box" id="size-3XL" onclick="selectSize('No-Size')">No Size</div>
+                        <div class="dropdown-selected" id="drop-down-select"  style="display: none; !important">Select size</div>
+                        <div class="dropdown-options" id="dropdownOptions" style="display: none !important;">
+                        <div style="display: none;" class="size-box" id="size-No-Size" onclick="selectSize('No-Size')">No Size</div>
+                        </div>
                         {% endif %}
                     </div>
 
