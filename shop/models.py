@@ -13,6 +13,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='productImages/')
     order_number = models.PositiveIntegerField(null=True,blank=True)
     tag = models.CharField(max_length=255,null=True,blank=True)
+    hasSize = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

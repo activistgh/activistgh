@@ -442,7 +442,8 @@ flex-wrap: wrap;
                     <span id="hoodies" style="padding: 10px; border: 1px solid #ed344d; border-radius: 15px;">Hoodies</span>
                     <span id="tees" style="padding: 10px; border: 1px solid #ed344d; border-radius:15px;">Tees</span>
                     <span id="shorts" style="padding: 10px; border: 1px solid #ed344d; border-radius:15px;">Shorts</span>
-                    <span id="pants" style="padding: 10px; border: 1px solid #ed344d; border-radius:15px;" style="width: fit-content;">Pants</span>      
+                    <span id="joggers" style="padding: 10px; border: 1px solid #ed344d; border-radius:15px;" style="width: fit-content;">Joggers</span>  
+                    <span id="headwears" style="padding: 10px; border: 1px solid #ed344d; border-radius:15px;" style="width: fit-content;">Headwears</span>  
                 </div>
             </div>
         </div>
@@ -518,6 +519,9 @@ flex-wrap: wrap;
     tee = document.getElementById('tees')
     tees = document.querySelectorAll('a.tee')
 
+    headwear = document.getElementById('headwears')
+    headwears = document.querySelectorAll('a.headwear')
+
 
     short = document.getElementById('shorts')
     shorts = document.querySelectorAll('a.shorts')
@@ -525,8 +529,8 @@ flex-wrap: wrap;
     hoodie = document.getElementById('hoodies')
     hoodies = document.querySelectorAll('a.hoodie')
 
-    pant = document.getElementById('pants')
-    pants = document.querySelectorAll('a.pants')
+    jogger = document.getElementById('joggers')
+    joggers = document.querySelectorAll('a.joggers')
     all = document.getElementById('all')
     all.onclick = () => {
             products.forEach((product) => {
@@ -536,15 +540,17 @@ flex-wrap: wrap;
             tee.classList.remove('activeMenu')
             hoodie.classList.remove('activeMenu')
             short.classList.remove('activeMenu')
-            pant.classList.remove('activeMenu')
+            jogger.classList.remove('activeMenu')
+            headwear.classList.remove('activeMenu')
 
         }
     tee.onclick = () => {
         all.classList.remove('activeMenu')
         tee.classList.add('activeMenu')
         hoodie.classList.remove('activeMenu')
-        pant.classList.remove('activeMenu')
+        jogger.classList.remove('activeMenu')
         short.classList.remove('activeMenu')
+        headwear.classList.remove('activeMenu')
         products.forEach((product) => {
             product.style.display = 'none';
         });
@@ -557,34 +563,38 @@ flex-wrap: wrap;
         all.classList.remove('activeMenu')
         tee.classList.remove('activeMenu')
         hoodie.classList.remove('activeMenu')
-        pant.classList.remove('activeMenu')
+        jogger.classList.remove('activeMenu')
         short.classList.add('activeMenu')
+        headwear.classList.remove('activeMenu')
             products.forEach((product) => {
             product.style.display = 'none';
         });
         shorts.forEach((short) => {
             short.style.display = 'block';
         });
+
     }
-    pant.onclick = () => {
+    jogger.onclick = () => {
             all.classList.remove('activeMenu')
             tee.classList.remove('activeMenu')
             hoodie.classList.remove('activeMenu')
-            pant.classList.add('activeMenu')
+            jogger.classList.add('activeMenu')
             short.classList.remove('activeMenu')
+            headwear.classList.remove('activeMenu')
             products.forEach((product) => {
                 product.style.display = 'none';
             });
-            pants.forEach((short) => {
+            joggers.forEach((short) => {
                 short.style.display = 'block';
             });
         }
     hoodie.onclick = () => {
         all.classList.remove('activeMenu')
         tee.classList.remove('activeMenu')
-        pant.classList.remove('activeMenu')
+        jogger.classList.remove('activeMenu')
         hoodie.classList.add('activeMenu')
         short.classList.remove('activeMenu')
+        headwear.classList.remove('activeMenu')
             products.forEach((product) => {
             product.style.display = 'none';
         });
@@ -592,6 +602,20 @@ flex-wrap: wrap;
             hoodie.style.display = 'block';
         });
     }
+     headwear.onclick = () => {
+            all.classList.remove('activeMenu')
+            tee.classList.remove('activeMenu')
+            jogger.classList.remove('activeMenu')
+            hoodie.classList.remove('activeMenu')
+            headwear.classList.add('activeMenu')
+            short.classList.remove('activeMenu')
+            products.forEach((product) => {
+                product.style.display = 'none';
+            });
+            headwears.forEach((headwear) => {
+                headwear.style.display = 'block';
+            });
+        }
 </script>
 <script>
     
