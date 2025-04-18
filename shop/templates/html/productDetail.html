@@ -527,7 +527,7 @@
                         {% if 'Denim' in product.name %}
                               <div class="dropdown-selected" id="drop-down-select" onclick="toggleDropdown()" >Select size</div>
                         <div class="dropdown-options" id="dropdownOptions">
-                            <div class="size-box" id="size-28" onclick="selectSize('28')">28</div>
+
                             <div class="size-box" id="size-30" onclick="selectSize('30')">30</div>
                             <div class="size-box" id="size-32" onclick="selectSize('32')">32</div>
                             <div class="size-box" id="size-34" onclick="selectSize('34')">34</div>
@@ -704,7 +704,7 @@
             document.getElementById("dropdownOptions").style.display = "none";
         }
         {% if 'Denim' in product.name %}
-            selectSize('28')
+            selectSize('30')
         {% else %}
         selectSize('M')
         {% endif %}
