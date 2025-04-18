@@ -36,6 +36,7 @@
         position: relative;
         z-index: 100;
         margin-bottom: 70px;
+        background-color: #000 !important;
         
     }
 
@@ -52,7 +53,7 @@
     .menu-button div {
         width: 30px;
         height: 1px;
-        background-color: #ed344d;
+        background-color: #C2DFFF;
         margin: 6px 0;
         transition: 0.4s;
     }
@@ -91,7 +92,7 @@
         align-items: center;
         height: 60px;
         padding: 0 20px;
-        background-color: #fff;
+        background-color: #000;
         position: fixed;
         top: 0;
         left: 0;
@@ -126,8 +127,7 @@
         padding: 10px;
         text-align: center;
         z-index: 1;
-        background-color: white;
-        
+        color: #fff !important;
     }
     a{
         text-decoration: none;
@@ -274,7 +274,7 @@
     } */
 
     .activeMenu {
-        background-color: #ed344d;
+        background-color: #C2DFFF;
         color: white;
     }
     footer{
@@ -388,13 +388,13 @@ flex-wrap: wrap;
                 <g id="SVGRepo_iconCarrier">
                     <path
                         d="M3.864 16.4552C4.40967 18.6379 4.68251 19.7292 5.49629 20.3646C6.31008 21 7.435 21 9.68486 21H14.3155C16.5654 21 17.6903 21 18.5041 20.3646C19.3179 19.7292 19.5907 18.6379 20.1364 16.4552C20.9943 13.0234 21.4233 11.3075 20.5225 10.1538C19.6217 9 17.853 9 14.3155 9H9.68486C6.14745 9 4.37875 9 3.47791 10.1538C2.94912 10.831 2.87855 11.702 3.08398 13"
-                        stroke="#ed344d" stroke-width="0.672" stroke-linecap="round"></path>
+                        stroke="#C2DFFF" stroke-width="0.672" stroke-linecap="round"></path>
                     <path
                         d="M19.5 9.5L18.7896 6.89465C18.5157 5.89005 18.3787 5.38775 18.0978 5.00946C17.818 4.63273 17.4378 4.34234 17.0008 4.17152C16.5619 4 16.0413 4 15 4M4.5 9.5L5.2104 6.89465C5.48432 5.89005 5.62128 5.38775 5.90221 5.00946C6.18199 4.63273 6.56216 4.34234 6.99922 4.17152C7.43808 4 7.95872 4 9 4"
-                        stroke="#ed344d" stroke-width="0.672"></path>
+                        stroke="#C2DFFF" stroke-width="0.672"></path>
                     <path
                         d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H10C9.44772 5 9 4.55228 9 4Z"
-                        stroke="#ed344d" stroke-width="0.672"></path>
+                        stroke="#C2DFFF" stroke-width="0.672"></path>
                 </g>
             </svg>
                 <span id="cart-total"></span>
@@ -433,11 +433,11 @@ flex-wrap: wrap;
             <div id="categoriesBox" style="display: flex; justify-content:right; padding-bottom: 18px; border-bottom: 1px solid #e3e6ea;  margin-left: auto; margin-right: auto;">
               
                 <div id="catBox" style="display: flex; justify-content: right;flex-wrap: wrap; ">
-                    <span id="all" class="activeMenu" style="padding: 10px; border: 1px solid #ed344d; border-radius: 15px;">All</span>
-                    <span id="hoodies" style="padding: 10px; border: 1px solid #ed344d; border-radius: 15px;">Hoodies</span>
-                    <span id="tees" style="padding: 10px; border: 1px solid #ed344d; border-radius:15px;">Tees</span>
-                    <span id="shorts" style="padding: 10px; border: 1px solid #ed344d; border-radius:15px;">Shorts</span>
-                    <span id="pants" style="padding: 10px; border: 1px solid #ed344d; border-radius:15px;" style="width: fit-content;">Pants</span>      
+                    <span id="all" class="activeMenu" style="padding: 10px; border: 1px solid #C2DFFF; border-radius: 15px;">All</span>
+                    <span id="hoodies" style="padding: 10px; border: 1px solid #C2DFFF; border-radius: 15px;">Hoodies</span>
+                    <span id="tees" style="padding: 10px; border: 1px solid #C2DFFF; border-radius:15px;">Tees</span>
+                    <span id="shorts" style="padding: 10px; border: 1px solid #C2DFFF; border-radius:15px;">Shorts</span>
+                    <span id="pants" style="padding: 10px; border: 1px solid #C2DFFF; border-radius:15px;" style="width: fit-content;">Pants</span>      
                 </div>
             </div>
         </div>
@@ -456,7 +456,7 @@ flex-wrap: wrap;
     </main>
 </body>
 
-<footer style="text-align: center; padding: 20px; background-color: #ed344d;">
+<footer style="text-align: center; padding: 20px; background-color: #C2DFFF;">
     <!-- Centering the logo -->
     <div style="display: flex; justify-content: center; margin-bottom: 20px;">
         <img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo" style="max-width: 150px;">
