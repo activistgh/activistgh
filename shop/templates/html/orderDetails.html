@@ -20,6 +20,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            background-color: #000;
 
         }
 
@@ -37,17 +38,20 @@
             flex: 1;
             min-width: 300px;
             padding: 20px;
-            background-color: #fff;
+            background-color: #000;
 
             margin-right: 20px;
         }
-
+        .checkout-form div{
+            background-color: #fff;
+        }
         /* Right column for cart items */
         .cart-items {
             flex: 1;
             min-width: 300px;
             padding: 20px;
-            background-color: #fff;
+            background-color: #000;
+            color:#fff;
 
         }
 
@@ -138,7 +142,8 @@
             bottom: 0;
             width: 50%;
             max-width: 400px;
-            background-color: #fff;
+            background-color: #000;
+            color:#fff;
 
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
@@ -194,7 +199,7 @@
         }
 
         .slide-menu ul li a {
-            color: black;
+            color: #fff;
             text-decoration: none;
 
             transition: color 0.2s ease;
@@ -211,7 +216,7 @@
             align-items: center;
             height: 60px;
             padding: 0 20px;
-            background-color: #fff;
+            background-color: #000;
             width: 100%;
             position: fixed;
             top: 0;
@@ -243,7 +248,7 @@
         .menu-button div {
             width: 30px;
             height: 1px;
-            background-color: black;
+            background-color: #ed344d;
             margin: 6px 0;
             transition: 0.4s;
         }
@@ -271,7 +276,7 @@
 
         <a href="{% url 'homePage' %}">
             <div class="header-logo">
-                <img src="{% static 'logo.svg' %}" alt="Footer Logo">
+                <img src="{% static 'ab.svg' %}" alt="Footer Logo">
             </div>
         </a>
         <div class="cart-button" style="visibility: hidden;">
@@ -308,7 +313,7 @@
             <li><a href="{% url 'gallery' %}">Gallery</a></li>
         </ul>
     </div>
-    <div style="display: flex; justify-content: center; margin-top: 100px; gap: 10px; align-items: center;" >
+    <div style="display: flex; justify-content: center; margin-top: 100px; gap: 10px; align-items: center; color:#fff !important;" >
         <div><b>Order Id: </b>{{payment.order_id}}</div>
             <div >
                 {% if request.user.is_authenticated %}
@@ -316,7 +321,7 @@
                     {% csrf_token %}
                     {{DeliveryStatusUpdateFormCreator}}
                     <input type="submit" name="updateDeliveryStatus" style="margin-left: 5px;" value="Update">
-                </form>
+                </form >
                 {% else %}
                 <b>Contact us:</b> +233 053766538 || acvststore@gmail.com
                 {% endif %}
@@ -339,8 +344,8 @@
                                             <div class="cart-item-size">{{item.size}}</div>
                                         </div>
                                     </div>
-                          <div style="display: flex; flex-direction: row; justify-content: right;font-size: 14px;color: #555;">
-                                    GHS<div class="cart-item-price">{% with quantity=item.quantity|multiply:item.product.price %}{{quantity}}0{% endwith %}
+                          <div style="display: flex; flex-direction: row; justify-content: right;font-size: 14px;color: #fff;">
+                                    GHS<div class="cart-item-price" style="color: #fff;">{% with quantity=item.quantity|multiply:item.product.price %}{{quantity}}0{% endwith %}
                                     </div>
                           </div>
 
@@ -355,12 +360,12 @@
         </div>
         <!-- Left Side: Form for customer details -->
         <div class="checkout-form">
-            <h2>Order Details</h2>
+            <h2 style="color: #fff;">Order Details</h2>
 
             
                 {% csrf_token %}
                 <input type="text" id="cartData" name="cartData" hidden>
-                <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+                <div style="display: flex; justify-content: center; gap: 10px; width: 100%; background-color: transparent !important;">
                         <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px; width: 50%;">
                             <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">First Name</label>
                             <div>
@@ -402,7 +407,7 @@
                 </div>
                     
                 </div>
-                <h2>Delivery Details</h2>
+                <h2 style="color: #fff;">Delivery Details</h2>
             <div style="border: 1px solid #dddddd; padding: 5px; border-radius: 5px; margin-bottom: 10px;">
                 <label style="color:#6e7073; font-size: 15px;padding-left: 4px;">Country:</label>
                 <div>
@@ -460,7 +465,7 @@
     </div>
     <div class="alert alert-info" style="display: none;"></div>
 
-    <footer style="text-align: center; padding: 20px; background-color: #000;">
+    <footer style="text-align: center; padding: 20px; background-color: #ed344d;">
         <!-- Centering the logo -->
         <div style="display: flex; justify-content: center; margin-bottom: 20px;">
             <img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo" style="max-width: 150px;">
@@ -502,13 +507,13 @@
 
         <!-- Footer Links -->
         <div style="margin-bottom: 20px;">
-            <div>Cause A Change</div>
+            <div style="color: #fff;">Cause A Change</div>
 
         </div>
 
         <!-- Footer Copyright -->
         <div>
-            <p class="copyright">&copy; 2024 ACTIVIST</p>
+            <p class="copyright" style="color: #fff;">&copy; 2024 ACTIVIST</p>
         </div>
     </footer>
 </body>

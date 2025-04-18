@@ -20,6 +20,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            background-color: #000;
 
         }
 
@@ -89,7 +90,8 @@
             bottom: 0;
             width: 50%;
             max-width: 400px;
-            background-color: #fff;
+            background-color: #000;
+            color:white;
 
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
@@ -144,7 +146,7 @@
         }
 
         .slide-menu ul li a {
-            color: black;
+            color: #fff;
             text-decoration: none;
 
             transition: color 0.2s ease;
@@ -161,7 +163,7 @@
             align-items: center;
             height: 60px;
             padding: 0 20px;
-            background-color: #fff;
+            background-color: #000;
 
             position: fixed;
             top: 0;
@@ -194,7 +196,8 @@
         .menu-button div {
             width: 30px;
             height: 1px;
-            background-color: black;
+            
+            background-color: #ed344d;
             margin: 6px 0;
             transition: 0.4s;
         }
@@ -254,7 +257,7 @@
 
         <a href="{% url 'homePage' %}">
             <div class="header-logo">
-                <img src="{% static 'logo.svg' %}" alt="Footer Logo">
+                <img src="{% static 'ab.svg' %}" alt="Footer Logo">
             </div>
         </a>
         <div class="cart-button" style="visibility: hidden;">
@@ -281,13 +284,13 @@
         <a href="{% url 'shop' %}">
             <div style="padding-left: 17px; margin-top: 30px;">
                 <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                    stroke="#000000" stroke-width="0.00024000000000000003">
+                    stroke="#ed344d" stroke-width="0.00024000000000000003">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
                         <path
                             d="M4 10L3.64645 10.3536L3.29289 10L3.64645 9.64645L4 10ZM20.5 18C20.5 18.2761 20.2761 18.5 20 18.5C19.7239 18.5 19.5 18.2761 19.5 18L20.5 18ZM8.64645 15.3536L3.64645 10.3536L4.35355 9.64645L9.35355 14.6464L8.64645 15.3536ZM3.64645 9.64645L8.64645 4.64645L9.35355 5.35355L4.35355 10.3536L3.64645 9.64645ZM4 9.5L14 9.5L14 10.5L4 10.5L4 9.5ZM20.5 16L20.5 18L19.5 18L19.5 16L20.5 16ZM14 9.5C17.5898 9.5 20.5 12.4101 20.5 16L19.5 16C19.5 12.9624 17.0376 10.5 14 10.5L14 9.5Z"
-                            fill="#222222"></path>
+                            fill="#ed344d"></path>
                     </g>
                 </svg>
             </div>
@@ -338,7 +341,8 @@
 
 
 
-    <footer style="text-align: center; padding: 20px; background-color: #000;">
+            
+    <footer style="text-align: center; padding: 20px; background-color:#ed344d;">
         <!-- Centering the logo -->
         <div style="display: flex; justify-content: center; margin-bottom: 20px;">
             <img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo" style="max-width: 150px;">
@@ -379,13 +383,13 @@
 
         <!-- Footer Links -->
         <div style="margin-bottom: 20px;">
-            <div>Cause A Change</div>
+            <div style="color: #fff;">Cause A Change</div>
            
         </div>
 
         <!-- Footer Copyright -->
         <div>
-            <p class="copyright">&copy; 2024 ACTIVIST</p>
+            <p class="copyright" style="color: #fff;">&copy; 2024 ACTIVIST</p>
         </div>
     </footer>
 
