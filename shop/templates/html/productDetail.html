@@ -89,6 +89,7 @@
             width: 50%;
             max-width: 400px;
             background-color: #000;
+            color: #fff;
            
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
@@ -120,6 +121,7 @@
         .slide-cart {
             right: 0;
             transform: translateX(100%);
+            color: #fff !important;
         }
 
         .slide-menu.active {
@@ -313,17 +315,18 @@
 .size-box {
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    background-color: #fff;
+    background-color: #000;
     z-index: 1;
 }
 
 .size-box:hover {
-    background-color: #f1f1f1;
+    background-color: #ed344d;
 }
 
 /* Add a selected style */
 .size-box.selected {
     background-color: #dcdcdc;
+    color: #000;
    
 }
     #optionBox{
@@ -607,7 +610,7 @@
     <!-- Related items section -->
 <div style="display: flex; justify-content: center;">
         <div style="max-width: 1200px; display: flex; justify-content: center;">
-            <h2 style="align-self: center;">Similar products</h2>
+            <h2 style="align-self: center; color: #fff !important;">Similar products</h2>
         </div>
 </div>
     <div class="product-grid">
@@ -703,7 +706,7 @@
         {% if 'Denim' in product.name %}
             selectSize('28')
         {% else %}
-        selectSize('3XL')
+        selectSize('M')
         {% endif %}
         // Close the dropdown if clicked outside
         document.addEventListener('click', function (event) {
