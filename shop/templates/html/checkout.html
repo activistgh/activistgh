@@ -19,6 +19,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            background-color: #000;
 
         }
 
@@ -37,7 +38,7 @@
             flex: 1;
             min-width: 300px;
             padding: 20px;
-            background-color: #fff;
+            background-color: #000;
 
             
         }
@@ -47,8 +48,9 @@
             flex: 1;
             min-width: 300px;
             padding: 20px;
-            background-color: #fff;
+            background-color: #000;
 
+            color: #fff;
         }
 
         /* Form styling */
@@ -137,7 +139,8 @@
             bottom: 0;
             width: 50%;
             max-width: 400px;
-            background-color: #fff;
+            background-color: #000;
+            color: #fff;
 
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
@@ -192,7 +195,7 @@ text-align: center;
 }
 
 .slide-menu ul li a {
-color: black;
+color: #fff;
 text-decoration: none;
 
 transition: color 0.2s ease;
@@ -209,7 +212,7 @@ line-height: 1rem;
             align-items: center;
             height: 60px;
             padding: 0 20px;
-            background-color: #fff;
+            background-color: #000;
 
             position: relative;
             padding-top: 11px;
@@ -238,7 +241,7 @@ line-height: 1rem;
         .menu-button div {
             width: 30px;
             height: 1px;
-            background-color: black;
+            background-color: #ed344d;
             margin: 6px 0;
             transition: 0.4s;
         }
@@ -268,7 +271,7 @@ line-height: 1rem;
 
             <a href="{% url 'homePage' %}">
                 <div class="header-logo">
-                    <img src="{% static 'logo.svg' %}" alt="Footer Logo">
+                    <img src="{% static 'ab.svg' %}" alt="Footer Logo">
                 </div>
             </a>
         <div class="cart-button" style="visibility: hidden;" >
@@ -294,13 +297,13 @@ line-height: 1rem;
     <a href="{% url 'shop' %}" >
         <div style="padding-left: 17px; margin-bottom: 10px;">
             <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                stroke="#000000" stroke-width="0.00024000000000000003">
+                stroke="#ed344d" stroke-width="0.00024000000000000003">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
                     <path
                         d="M4 10L3.64645 10.3536L3.29289 10L3.64645 9.64645L4 10ZM20.5 18C20.5 18.2761 20.2761 18.5 20 18.5C19.7239 18.5 19.5 18.2761 19.5 18L20.5 18ZM8.64645 15.3536L3.64645 10.3536L4.35355 9.64645L9.35355 14.6464L8.64645 15.3536ZM3.64645 9.64645L8.64645 4.64645L9.35355 5.35355L4.35355 10.3536L3.64645 9.64645ZM4 9.5L14 9.5L14 10.5L4 10.5L4 9.5ZM20.5 16L20.5 18L19.5 18L19.5 16L20.5 16ZM14 9.5C17.5898 9.5 20.5 12.4101 20.5 16L19.5 16C19.5 12.9624 17.0376 10.5 14 10.5L14 9.5Z"
-                        fill="#222222"></path>
+                        fill="#ed344d"></path>
                 </g>
             </svg>
         </div>
@@ -344,7 +347,7 @@ line-height: 1rem;
         </div>
         <!-- Left Side: Form for customer details -->
         <div class="checkout-form">
-            <h2>Personal Details</h2>
+            <h2 style="color: #fff;">Personal Details</h2>
 
             <form id="checkout-form-sub" method="POST" action="/checkout">
                 {% csrf_token %}
@@ -372,7 +375,7 @@ line-height: 1rem;
                         id="floatingTextarea" name="orderNotes"></textarea>
                     <label for="floatingTextarea">Order Notes (optional)</label>
                 </div>
-                <h2>Delivery Details</h2>
+                <h2 style="color: #fff;">Delivery Details</h2>
                 <div class="form-floating mb-3">
                     <input class="form-control" type="text" id="street-address-1" name="street_address_1" required>
                     <label for="street-address-1">Street Address Line 1:</label>
@@ -667,7 +670,7 @@ line-height: 1rem;
                 </div>
 
                 <button type="submit" name="pay" id="payButton"
-                    style="width:100%;padding:10px;border:none;background-color:#28a745;color:white;font-size:18px;border-radius:5px;">Proceed
+                    style="width:100%;padding:10px;border:none;background-color:#ed344d;color:white;font-size:18px;border-radius:5px;">Proceed
                     to pay</button>
             </form>
         </div>
@@ -675,7 +678,7 @@ line-height: 1rem;
       
     </div>
     <div class="alert alert-info" style="display: none;"></div>
-<footer style="text-align: center; padding: 20px; background-color: #000;">
+<footer style="text-align: center; padding: 20px; background-color: #ed344d;">
     <!-- Centering the logo -->
     <div style="display: flex; justify-content: center; margin-bottom: 20px;">
         <img src="{% static 'logo-white.svg' %}" id="logo-footer" alt="Footer Logo" style="max-width: 150px;">
@@ -716,13 +719,13 @@ line-height: 1rem;
 
     <!-- Footer Links -->
     <div style="margin-bottom: 20px;">
-        <div>Cause A Change</div>
+        <div style="color: #fff;">Cause A Change</div>
 
     </div>
 
     <!-- Footer Copyright -->
     <div>
-        <p class="copyright">&copy; 2024 ACTIVIST</p>
+        <p class="copyright" style="color:#fff">&copy; 2024 ACTIVIST</p>
     </div>
 </footer>
 </body>
