@@ -184,3 +184,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY')
 
 PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY')
+
+
+
+# Use Django’s SMTP backend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Zoho SMTP settings (SSL on port 465)
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'contact@activist.store'
+EMAIL_HOST_PASSWORD = 'sNd5TcBPJmu3'
+EMAIL_USE_SSL = True
+
+# Default from‐address for all outgoing emails
+DEFAULT_FROM_EMAIL = 'Activist <contact@activist.store>'
+
+# (Optional) address that Django will use for server‐error emails
+# SERVER_EMAIL = 'info@longlivesdl.com'

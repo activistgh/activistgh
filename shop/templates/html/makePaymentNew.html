@@ -198,6 +198,40 @@
             max-width: 20%;
             width: 33%;
         }
+        .region-selector {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px 0;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+.region-selector label {
+  font-size: 0.875rem;
+  color: #ffffff;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.region-selector select {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-width: 140px;
+}
+
+.region-selector select:hover,
+.region-selector select:focus {
+  border-color: #ed344d;
+  box-shadow: 0 0 0 2px rgba(237, 52, 77, 0.3);
+}
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
@@ -348,7 +382,7 @@
                             {% for item in payment.cart.cart_objects.all %}
                             <tr>
                                 <td class="px-0">{{item.product.name}} - {{item.size}} x{{item.quantity}}</td>
-                                <td class="text-end px-0">GHS{{item.price}}0</td>
+                                <td class="text-end px-0 product-price" data-base-price="{{item.price}}">GHS{{item.price}}0</td>
                             </tr>
                             {% endfor %}
       
@@ -358,7 +392,7 @@
                     <div class="mt-5">
                         <div class="d-flex justify-content-end">
                             <p class="text-muted me-3">Subtotal:</p>
-                            <span>GHS{{payment.amount}}</span>
+                            <span class="{{payment.amount}}" data-base-price="{{payment.amount}}">GHS{{payment.amount}}</span>
                         </div>
               {% if payment.delivery_price == 0 %}
                         {% if ship_to == False %}
@@ -367,13 +401,13 @@
               {% else %}
                         <div class="d-flex justify-content-end">
                             <p class="text-muted me-3">Delivery Fee</p>
-                            <span>GHS{{payment.delivery_actual}}</span>
+                            <span class="product-price" data-base-price="{{payment.delivery_actual}}">GHS{{payment.delivery_actual}}</span>
                         </div>
                 {% endif %}
                         <div class="d-flex justify-content-end mt-3">
                            <div>
                             <h5 class="me-3">Total:</h5>
-                            <h5 class="text-success">GHS{{payment.total_actual}}</h5>
+                            <h5 class="text-success product-price" data-base-price="{{payment.total_actual}}">GHS{{payment.total_actual}}</h5>
                            </div>
                         </div>
                     </div>
@@ -440,7 +474,11 @@
     <!-- Footer Links -->
     <div style="margin-bottom: 20px;">
         <div style="color: #fff;">Cause A Change</div>
-
+        <div class="region-selector"
+            style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center;">
+            <label for="regionSelect">Country/Region</label>
+            <select id="regionSelect"></select>
+        </div>
     </div>
 
     <!-- Footer Copyright -->
@@ -562,5 +600,74 @@
 
 </script>
 
+<script>
+    (function () {
+        const regions = [
+            { name: 'Ghana', code: 'GHS', symbol: '₵' },
+            { name: 'Nigeria', code: 'NGN', symbol: '₦' },
+            { name: 'United States', code: 'USD', symbol: '$' },
+            { name: 'European Union', code: 'EUR', symbol: '€' },
+            { name: 'United Kingdom', code: 'GBP', symbol: '£' },
+            // …add more as needed
+        ];
 
+        const SELECT_KEY = 'selectedRegion';
+        const BASE = 'GHS';
+        const API_URL = 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json';
+        const select = document.getElementById('regionSelect');
+
+        // build dropdown
+        regions.forEach(r => {
+            let opt = document.createElement('option');
+            opt.value = r.code;
+            opt.textContent = `${r.name} (${r.code})`;
+            select.append(opt);
+        });
+
+        // load saved region or default
+        select.value = localStorage.getItem(SELECT_KEY) || BASE;
+        select.addEventListener('change', () => {
+            localStorage.setItem(SELECT_KEY, select.value);
+            fetchAndApply(select.value);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchAndApply(select.value);
+        });
+
+        function fetchAndApply(target) {
+            // if GHS selected, just use 1:1
+            if (target === BASE) {
+                applyPrices(1, regions.find(r => r.code === BASE).symbol);
+                return;
+            }
+
+            fetch(API_URL)
+                .then(r => r.json())
+                .then(data => {
+                    // data.eur is an object: { "ghs": rate, "usd": rate, … }
+                    const eurRates = data.eur || data.EUR || data;
+                    const rateToTarget = eurRates[target.toLowerCase()];
+                    const rateToBase = eurRates[BASE.toLowerCase()];
+                    // GHS → TARGET = (EUR→TARGET) ÷ (EUR→GHS)
+                    const multiplier = rateToTarget / rateToBase;
+                    const symbol = regions.find(r => r.code === target).symbol;
+                    applyPrices(multiplier, symbol);
+                })
+                .catch(err => {
+                    console.error('Currency API failed', err);
+                    // fallback to GHS
+                    applyPrices(1, regions.find(r => r.code === BASE).symbol);
+                });
+        }
+
+        function applyPrices(rate, symbol) {
+            document.querySelectorAll('.product-price').forEach(el => {
+                let base = parseFloat(el.dataset.basePrice) || 0;
+                let conv = (base * rate).toFixed(2);
+                el.textContent = `${symbol}${conv}`;
+            });
+        }
+    })();
+</script>
 </html>

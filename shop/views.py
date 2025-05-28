@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from .models import Product, RelatedImages
 from .forms import DeliveryStatusUpdateForm
 from payment.models import Payment
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 from django.conf import settings 
 from .models import Cart, CartObject
 from .deliveryRatesGen import generate_shipping_cost
@@ -109,9 +111,48 @@ def checkout(request):
 
 
 def orderSuccess(request,ref):
+    
     payment = Payment.objects.get(ref=ref)
     payment.verified = True
     payment.save()
+
+    # 2. Build the link the customer will click to view their order status
+    payment_link = f'http://www.activist.store/orderDetails/{payment.ref}'
+
+    # 3. Prepare email context
+    context = {
+        'payment': payment,
+        'payment_link': payment_link,
+    }
+
+    # 4. Render the HTML email template
+    subject = f"Thank you for your order {payment.first_name}!"
+    from_email = 'Activist <contact@activist.store>'
+    to_email = str(payment.email)
+    
+    # A plain-text fallback
+    text_content = (
+        f"Hi {payment.first_name},\n\n"
+        f"Thank you for your order #{payment.order_id}!\n"
+        f"To check the status of your order, visit:\n"
+        f"{payment_link}\n\n"
+        "Thanks again for shopping with us."
+    )
+
+    html_content = render_to_string(
+        'html/order_confirmation_email.html',
+        context
+    )
+
+    # 5. Send the email
+    email = EmailMultiAlternatives(subject, text_content, from_email, [to_email])
+    email.attach_alternative(html_content, "text/html")
+    try:
+        email.send()
+    except Exception as e:
+        # you might log this or show a user-friendly message
+        print(f"Order confirmation email failed: {e}")
+
 
     # cart 
     cart = Cart.objects.get(payment=payment)

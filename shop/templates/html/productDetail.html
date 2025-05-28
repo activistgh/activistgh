@@ -416,6 +416,41 @@
         .productCover{
             color: #fff;
         }
+        
+.region-selector {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px 0;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+.region-selector label {
+  font-size: 0.875rem;
+  color: #ffffff;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.region-selector select {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-width: 140px;
+}
+
+.region-selector select:hover,
+.region-selector select:focus {
+  border-color: #ed344d;
+  box-shadow: 0 0 0 2px rgba(237, 52, 77, 0.3);
+}
+
     </style>
 </head>
 
@@ -521,7 +556,7 @@
                    
                     <h1 class="display-5 fw-bolder">{{product.name}}</h1>
                     <div class="fs-5 mb-5">
-                        <span>GH₵{{product.price}}0</span>
+                        <span class="product-price" data-base-price="{{product.price}}">GH₵{{product.price}}0</span>
                     </div>
                     <div id="optionBox" class="dropdown" >
                         {% if product.hasSize %}
@@ -626,7 +661,7 @@
             <div class="product-item">
                 <img src="{{ item.image.url }}" alt="{{ item.name }}">
                 <div class="product-name">{{ item.name }}</div>
-                <div class="product-price">GH₵{{ item.price }}0</div>
+                <div class="product-price"  data-base-price="{{item.price}}">GH₵{{ item.price }}0</div>
             </div>
         </a>
         {% endfor %}
@@ -673,7 +708,11 @@
     <!-- Footer Links -->
     <div style="margin-bottom: 20px;">
         <div style="color: #fff !important;">Cause A Change</div>
-
+        <div class="region-selector"
+            style="display: inline-flex; flex-direction: column; align-items: center; justify-content: center;">
+            <label for="regionSelect">Country/Region</label>
+            <select id="regionSelect"></select>
+        </div>
     </div>
 
     <!-- Footer Copyright -->
@@ -796,6 +835,76 @@
         document.body.style.overflow = 'scroll'
     });
 </script>
+<script>
+    (function () {
+        const regions = [
+            { name: 'Ghana', code: 'GHS', symbol: '₵' },
+            { name: 'Nigeria', code: 'NGN', symbol: '₦' },
+            { name: 'United States', code: 'USD', symbol: '$' },
+            { name: 'European Union', code: 'EUR', symbol: '€' },
+            { name: 'United Kingdom', code: 'GBP', symbol: '£' },
+            // …add more as needed
+        ];
+
+        const SELECT_KEY = 'selectedRegion';
+        const BASE = 'GHS';
+        const API_URL = 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json';
+        const select = document.getElementById('regionSelect');
+
+        // build dropdown
+        regions.forEach(r => {
+            let opt = document.createElement('option');
+            opt.value = r.code;
+            opt.textContent = `${r.name} (${r.code})`;
+            select.append(opt);
+        });
+
+        // load saved region or default
+        select.value = localStorage.getItem(SELECT_KEY) || BASE;
+        select.addEventListener('change', () => {
+            localStorage.setItem(SELECT_KEY, select.value);
+            fetchAndApply(select.value);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchAndApply(select.value);
+        });
+
+        function fetchAndApply(target) {
+            // if GHS selected, just use 1:1
+            if (target === BASE) {
+                applyPrices(1, regions.find(r => r.code === BASE).symbol);
+                return;
+            }
+
+            fetch(API_URL)
+                .then(r => r.json())
+                .then(data => {
+                    // data.eur is an object: { "ghs": rate, "usd": rate, … }
+                    const eurRates = data.eur || data.EUR || data;
+                    const rateToTarget = eurRates[target.toLowerCase()];
+                    const rateToBase = eurRates[BASE.toLowerCase()];
+                    // GHS → TARGET = (EUR→TARGET) ÷ (EUR→GHS)
+                    const multiplier = rateToTarget / rateToBase;
+                    const symbol = regions.find(r => r.code === target).symbol;
+                    applyPrices(multiplier, symbol);
+                })
+                .catch(err => {
+                    console.error('Currency API failed', err);
+                    // fallback to GHS
+                    applyPrices(1, regions.find(r => r.code === BASE).symbol);
+                });
+        }
+
+        function applyPrices(rate, symbol) {
+            document.querySelectorAll('.product-price').forEach(el => {
+                let base = parseFloat(el.dataset.basePrice) || 0;
+                let conv = (base * rate).toFixed(2);
+                el.textContent = `${symbol}${conv}`;
+            });
+        }
+    })();
+</script>
 
 <script>
         // Function to format the price
@@ -826,7 +935,7 @@
                         </div>
                         <div style='display:flex; justify-content:space-between;'>
                         <p style="margin: 0; font-size: 14px;">${item.selectedSize}</p>
-                            <p style="margin: 0; font-size: 14px;"> GH₵ ${item.price}</p>
+                            <p style="margin: 0; font-size: 14px;" class="product-price" data-base-price="${item.price}" > GH₵ ${item.price}</p>
                         </div>
                         </div>
                         <button class="close-button" onclick="removeFromCart('${item.product_id_date}')" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 16px; color: #FF5722;">&times;</button>
@@ -839,7 +948,7 @@
             cartBox.innerHTML += `
         <div style="display: flex; justify-content: space-between; align-items: center;margin-left: 20px;" id="total-price-div" >
             <div>Total:</div>
-            <div class="total-price" id="total-price" style="color: #28a745; font-weight: bold; margin-right: 20px;">${formatPrice(totalPrice) }</div>
+            <div class="total-price product-price" id="total-price" style="color: #28a745; font-weight: bold; margin-right: 20px;" data-base-price="${totalPrice}" >${formatPrice(totalPrice) }</div>
         </div>
         <div style="text-align: center; margin: 20px;">
                 <a href="{% url 'checkout' %}">       <button style="padding: 10px 20px; width:100%; background-color: #228B22; color: white; border: none; border-radius: 5px; cursor: pointer;">
