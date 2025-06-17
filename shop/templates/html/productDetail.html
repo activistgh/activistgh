@@ -579,7 +579,10 @@
                             <div class="size-box" id="size-L" onclick="selectSize('L')">L</div>
                             <div class="size-box" id="size-XL" onclick="selectSize('XL')">XL</div>
                             <div class="size-box" id="size-2XL" onclick="selectSize('2XL')">2XL</div>
-                            <div class="size-box" id="size-3XL" onclick="selectSize('3XL')">3XL</div>
+                          {% if 'War' in product.name %}
+                          {% else %}
+                          <div class="size-box" id="size-3XL" onclick="selectSize('3XL')">3XL</div>
+                          {% endif %}
                         </div>
                         {% endif %}
                         {% else %}
