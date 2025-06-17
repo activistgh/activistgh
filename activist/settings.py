@@ -162,7 +162,7 @@ GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
 GS_MEDIA_BUCKET_NAME = GS_BUCKET_NAME
 MEDIA_URL = f'https://storage.googleapis.com/{GS_MEDIA_BUCKET_NAME}/'
 
-
+#update
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
